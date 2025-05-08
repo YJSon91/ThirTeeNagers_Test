@@ -97,6 +97,18 @@ public class GameManager : MonoBehaviour
         _score += score;
     }
 
+    //로비 -> 게임으로 들어갈때 완전 초기화 메서드
+    public void InitGame()
+    {
+        _isStageClear = false;
+        _isGameOver = false;
+        _stageTimer = 0f;
+        _currentStage = 0;
+        _requiredSurvivalTime = 0f;
+        _score = 0;
+    }
+
+
 
     //아직 미정
     //대미지 처리 메서드
