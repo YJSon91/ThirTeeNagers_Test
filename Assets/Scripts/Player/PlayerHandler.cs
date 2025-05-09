@@ -45,9 +45,10 @@ public class PlayerHandler : PlayerState
         if (isDead) return; //플레이어가 죽은 상태면 아무것도 안하고 빠져나간다.
 
         Vector3 velocity = _rigidbody2D.velocity; // RigidBody2D에 있는 velocity를 복사
+        //Debug.Log(velocity); ///////////// 테스트용 코드(속도 확인)
 
 
-        //velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();//
+        velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();//
 
         animator.SetBool("IsRun", true);
 
