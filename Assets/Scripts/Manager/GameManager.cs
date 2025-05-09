@@ -16,20 +16,21 @@ public class GameManager : MonoBehaviour
 
 
 
-
-    //[SerializeField] private float _stageTimer = 0;    //시간 변수
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
+
     //점수 프로퍼티
     public int score
     {
         get { return _score; }
         set { _score = value; }
     }
+
     [SerializeField] private int _currentStage = 1;        //스테이지 번호
     //스테이지 번호 프로퍼티
     public int currentStage { get { return _currentStage; } }
+
     [SerializeField] private float _baseSurvivalTime = 30f;     //버텨야 하는 시간 default
     [SerializeField] private float _requiredSurvivalTime = 0f;  //실제 버텨야하는 시간
     [SerializeField] private float _increaseDuration = 10f;  //스테이지 거듭할 수록 늘어날 시간 증가값
@@ -81,7 +82,6 @@ public class GameManager : MonoBehaviour
         _requiredSurvivalTime = Mathf.Max(0f, _requiredSurvivalTime - Time.deltaTime);     //버텨야 되는 시간을 deltaTime만큼 뺌(0보다 낮은 수가 나오지 않게 하게 최저값을 0으로 지정)
         survivalTimeSlider.value = _requiredSurvivalTime;
 
-        //Debug.Log(_time);
 
         //버텨야 하는 시간이 0이 되면 클리어
         if (_requiredSurvivalTime <= 0)  
