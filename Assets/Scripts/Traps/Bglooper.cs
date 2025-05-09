@@ -30,7 +30,7 @@ public class Bglooper : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         // 충돌한 객체의 이름을 디버그 로그에 출력
-        Debug.Log("Triggered: " + collision.name);
+       // Debug.Log("Triggered: " + collision.name);
 
         if (collision.CompareTag("Ground"))
         {

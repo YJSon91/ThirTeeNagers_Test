@@ -36,6 +36,20 @@ public class Obstacle : MonoBehaviour
 
         // 새로 설정된 위치를 반환
         return placePosition;
-    }
 
+
+    }// 플레이어가 장애물에 충돌 시 데미지 처리할 로직 추가
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        // 충돌한 객체의 이름을 디버그 로그에 출력
+        Debug.Log("Triggered");
+
+        PlayerHandler player = collision.GetComponent<PlayerHandler>();
+        if ((player))
+        {
+            player.TakeDamage(1);
+            Debug.Log("Damaged");
+
+        }
+    }
 }
