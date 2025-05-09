@@ -8,7 +8,7 @@ public class Bglooper : MonoBehaviour
 
     public int obstacleCount = 0; // 장애물의 개수
     public Vector3 obstacleLastPosition = Vector3.zero; // 마지막으로 배치된 장애물의 위치
-    public int numBgCount = 3;
+    public int numBgCount = 1;
 
     void Start()
     {
