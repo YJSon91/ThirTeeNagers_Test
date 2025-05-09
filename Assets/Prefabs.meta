@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs.meta
 guid: d308bbb9e07a159479e754e5adb5378b
+========
+guid: 3f733615c937a4b748fb3a02cc905b64
+>>>>>>>> Develope:Assets/Scripts/Traps.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

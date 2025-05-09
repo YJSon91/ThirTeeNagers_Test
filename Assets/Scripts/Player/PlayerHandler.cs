@@ -24,6 +24,13 @@ public class PlayerHandler : PlayerState
             Debug.Log("리지드바디가 할당되지않았습니다.");
         }
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            TakeDamage(1);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -32,12 +39,24 @@ public class PlayerHandler : PlayerState
         Vector3 velocity = _rigidbody2D.velocity; // RigidBody2D에 있는 velocity를 velocity로 변수로 만든다.
         velocity.x = PlayerSpeed; // PlayerSpeed를 velocity.x에 계속 값 넣기
 
+        //velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();//
+
+        animator.SetBool("IsRun", true);
+
         if (isJump) // 플레이어가 점프 상태라면
         {
-
             velocity.y += JumpForce; // JumForce 만큼 더해줌
+            animator.SetBool("IsJump", true);
             isJump = false; // 그러고 점프상태를 false로 만들어서 점프를 끝냄
         }
+
+        if (_rigidbody2D.velocity.y < -0.1f)
+        {
+            animator.SetBool("IsJump", false);  // 꼭 같이 꺼주기!
+            animator.SetBool("IsFall", true);
+        }
+
+
         _rigidbody2D.velocity = velocity; //변경된 값들을 다시 rigidbody2D.velocity에 넣는다
     }
     void OnJump(InputValue inputValue) // 인풋 밸류 시스템에서 입력값을 받아옴
@@ -53,7 +72,8 @@ public class PlayerHandler : PlayerState
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;  // 현재체력 감소 시킴
-        animator.SetBool("Damage", true); //애니메이터의 불값을 트루로 변경 해줌
+        StartCoroutine(HitEffect());
+        animator.SetTrigger("IsHit");
         if (CurrentHealth <= 0)  // 현재체력이 0이되면 Die메서드 실행
         {
             Die();
@@ -70,7 +90,16 @@ public class PlayerHandler : PlayerState
     {
         Debug.Log(CurrentJumpCount);     ///////////// 테스트용 코드(점프 횟수 확인) 
         collision.gameObject.CompareTag("Ground"); // 충돌체의 태그가 "Ground"면
+        animator.SetBool("IsJump", false);
+        animator.SetBool("IsFall", false);
         CurrentJumpCount = 0;    //충돌체에 닿을 경우 점프 횟수 초기화
         Debug.Log(CurrentJumpCount);    ///////////// 테스트용 코드(점프 횟수 확인)
+    }
+
+    private IEnumerator HitEffect()
+    {
+        animator.SetTrigger("IsHit");
+        yield return new WaitForSeconds(0.05f);
+        animator.SetTrigger("IsHit");
     }
 }
