@@ -6,43 +6,46 @@ using System.Collections;
 public class PlayerItemInteraction : MonoBehaviour
 {
     [Header("속도 효과 지속 시간 (초)")]
-    [SerializeField] private float speedChangeDuration = 5f;
+    [SerializeField] private float speedChangeDuration = 5f; // 속도 아이템 효과가 유지되는 시간 (초)
 
-    // 현재 속도 배율 (1.0f = 기본, 1.5f = 가속, 0.5f = 감속)
+    // 현재 속도 배율 (1.0f = 정상 속도, 1.5f = 1.5배 빠름, 0.5f = 절반 속도)
     private float currentSpeedMultiplier = 1f;
 
-    // 코루틴 참조 저장 (중첩 방지용)
+    // 현재 실행 중인 속도 코루틴을 저장 (중복 효과 방지용)
     private Coroutine speedCoroutine;
 
-    // 속도 아이템 효과 적용 (true = 가속 / false = 감속)
+    // 속도 아이템 효과를 적용하는 함수
+    // isSpeedUp이 true면 가속, false면 감속
     public void ChangeMovementSpeed(bool isSpeedUp)
     {
+        // 가속이면 1.5배, 감속이면 0.5배 배율 적용
         float multiplier = isSpeedUp ? 1.5f : 0.5f;
 
+        // 기존에 실행 중인 효과가 있으면 중단 (중첩 방지)
         if (speedCoroutine != null)
         {
             StopCoroutine(speedCoroutine);
         }
 
+        // 새로운 속도 배율 코루틴 실행
         speedCoroutine = StartCoroutine(ApplySpeedMultiplierTemporarily(multiplier));
     }
 
-    // 일정 시간 동안 배율 적용 후 복구
+    // 일정 시간 동안 배율을 적용하고 다시 1.0f로 복원하는 코루틴
     private IEnumerator ApplySpeedMultiplierTemporarily(float multiplier)
     {
-        currentSpeedMultiplier = multiplier;
+        currentSpeedMultiplier = multiplier; // 새로운 배율 적용
 
-        yield return new WaitForSeconds(speedChangeDuration);
+        yield return new WaitForSeconds(speedChangeDuration); // 설정된 시간만큼 대기
 
-        currentSpeedMultiplier = 1f;
+        currentSpeedMultiplier = 1f; // 시간이 지나면 다시 정상 속도로 복원
     }
 
-    // 현재 이동 속도를 반환
-    // GameManager의 기본 속도에 배율을 곱한 결과 반환
-    // GameManager.Instance.GetCurrentGameSpeed()는 현재 기본 속도를 반환하는 함수여야 함
+    // 현재 이동 속도를 반환하는 함수
+    // GameManager에 있는 현재 기본 속도에 배율을 곱해서 최종 속도를 계산
     public float GetCurrentSpeed()
     {
-        float baseSpeed = GameManager.Instance.GetCurrentGameSpeed(); // ← GameManager에 함수 반드시 추가할 것
-        return baseSpeed * currentSpeedMultiplier;
+        float baseSpeed = GameManager.Instance.GetCurrentGameSpeed(); // GameManager에서 현재 기본 속도 가져옴
+        return baseSpeed * currentSpeedMultiplier; // 최종 속도 = 기본 속도 × 배율
     }
 }
