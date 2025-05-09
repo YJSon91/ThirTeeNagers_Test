@@ -323,8 +323,8 @@ Transform:
   m_GameObject: {fileID: 8686048743419821441}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 27.788641, y: 15.7422285, z: 0}
+  m_LocalPosition: {x: -0.0332, y: 0, z: 0}
+  m_LocalScale: {x: 27.685823, y: 15.7422285, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 526036253468191014}
@@ -365,8 +365,8 @@ Transform:
   - {fileID: 7710414181312311991}
   - {fileID: 6900517028758192062}
   - {fileID: 244616698652751899}
-  - {fileID: 6829460861863181769}
   - {fileID: 8835269878885233472}
+  - {fileID: 6829460861863181769}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &707545915512712890
@@ -670,8 +670,7 @@ GameObject:
   - component: {fileID: 6829460861863181769}
   - component: {fileID: 5189834932842228570}
   m_Layer: 0
-  m_Name: "\uC2A4\uD06C\uB9B0\uC0F7 2025-05-08 200802 - \uBCF5\uC0AC\uBCF8 - \uBCF5\uC0AC\uBCF8
-    - \uBCF5\uC0AC\uBCF8"
+  m_Name: Endbtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1087,8 +1086,7 @@ GameObject:
   - component: {fileID: 8835269878885233472}
   - component: {fileID: 860031852949940909}
   m_Layer: 0
-  m_Name: "\uC2A4\uD06C\uB9B0\uC0F7 2025-05-08 200802 - \uBCF5\uC0AC\uBCF8 - \uBCF5\uC0AC\uBCF8
-    - \uBCF5\uC0AC\uBCF8 - \uBCF5\uC0AC\uBCF8"
+  m_Name: Stbtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1289,7 +1287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
