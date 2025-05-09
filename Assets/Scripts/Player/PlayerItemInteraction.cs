@@ -1,44 +1,48 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
-/*
- * PlayerItemInteraction.cs
- * -------------------------
- * ÀÌ ½ºÅ©¸³Æ®´Â ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ°ú Ãæµ¹ÇßÀ» ¶§
- * Ã¼·Â Áõ°¡, ¼Óµµ Áõ°¡/°¨¼Ò µîÀÇ È¿°ú¸¦ Àû¿ëÇÏ´Â Àü¿ë ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
- * 
- * [»ç¿ë ¹æ¹ı]
- * 1. ÀÌ ½ºÅ©¸³Æ®¸¦ Player ¿ÀºêÁ§Æ®¿¡ ºÙÀÔ´Ï´Ù.
- * 2. Item.cs ½ºÅ©¸³Æ®¿¡¼­ Ãæµ¹ÇÑ ´ë»ó¿¡°Ô ÀÌ ½ºÅ©¸³Æ®¸¦ GetComponent·Î °¡Á®¿É´Ï´Ù.
- *    ¿¹:
- *       PlayerItemInteraction itemHandler = collision.GetComponent<PlayerItemInteraction>();
- *       if (itemHandler != null)
- *       {
- *           itemHandler.IncreaseHealth(1); // Ã¼·Â +1
- *           itemHandler.ChangeMovementSpeed(true); // °¡¼Ó
- *       }
- * 
- * [ÁÖÀÇ »çÇ×]
- * - ÀÌ ½ºÅ©¸³Æ®´Â PlayerController¿Í ºĞ¸®µÇ¾î µ¶¸³ÀûÀ¸·Î ºÙÀÏ ¼ö ÀÖ½À´Ï´Ù.
- * - Start()¿¡¼­ ÃÊ±â°ª ÀÚµ¿ ¼³Á¤ (currentSpeed, currentHealth)
- */
-
+// í”Œë ˆì´ì–´ê°€ ì•„ì´í…œ íš¨ê³¼(ì†ë„ ë°°ìœ¨)ë¥¼ ë°›ëŠ” ì²˜ë¦¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
+// GameManagerì˜ ê¸°ë³¸ ì†ë„ì— ë°°ìœ¨ì„ ê³±í•´ ì¼ì‹œì ì¸ ì†ë„ ë³€í™”ë¥¼ ì ìš©í•œë‹¤
 public class PlayerItemInteraction : MonoBehaviour
 {
-    [Header("¾ÆÀÌÅÛ È¿°ú ¼³Á¤")]
-    [SerializeField] private float defaultSpeed = 5f;
+    [Header("ì†ë„ íš¨ê³¼ ì§€ì† ì‹œê°„ (ì´ˆ)")]
     [SerializeField] private float speedChangeDuration = 5f;
-    [SerializeField] private int maxHealth = 3;
 
-    private float currentSpeed;
-    private int currentHealth;
+    // í˜„ì¬ ì†ë„ ë°°ìœ¨ (1.0f = ê¸°ë³¸, 1.5f = ê°€ì†, 0.5f = ê°ì†)
+    private float currentSpeedMultiplier = 1f;
+
+    // ì½”ë£¨í‹´ ì°¸ì¡° ì €ì¥ (ì¤‘ì²© ë°©ì§€ìš©)
     private Coroutine speedCoroutine;
 
-    private void Start()
+    // ì†ë„ ì•„ì´í…œ íš¨ê³¼ ì ìš© (true = ê°€ì† / false = ê°ì†)
+    public void ChangeMovementSpeed(bool isSpeedUp)
     {
-        currentSpeed = defaultSpeed;
-        currentHealth = maxHealth;
+        float multiplier = isSpeedUp ? 1.5f : 0.5f;
+
+        if (speedCoroutine != null)
+        {
+            StopCoroutine(speedCoroutine);
+        }
+
+        speedCoroutine = StartCoroutine(ApplySpeedMultiplierTemporarily(multiplier));
+    }
+
+    // ì¼ì • ì‹œê°„ ë™ì•ˆ ë°°ìœ¨ ì ìš© í›„ ë³µêµ¬
+    private IEnumerator ApplySpeedMultiplierTemporarily(float multiplier)
+    {
+        currentSpeedMultiplier = multiplier;
+
+        yield return new WaitForSeconds(speedChangeDuration);
+
+        currentSpeedMultiplier = 1f;
+    }
+
+    // í˜„ì¬ ì´ë™ ì†ë„ë¥¼ ë°˜í™˜
+    // GameManagerì˜ ê¸°ë³¸ ì†ë„ì— ë°°ìœ¨ì„ ê³±í•œ ê²°ê³¼ ë°˜í™˜
+    // GameManager.Instance.GetCurrentGameSpeed()ëŠ” í˜„ì¬ ê¸°ë³¸ ì†ë„ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜ì—¬ì•¼ í•¨
+    public float GetCurrentSpeed()
+    {
+        float baseSpeed = GameManager.Instance.GetCurrentGameSpeed(); // â† GameManagerì— í•¨ìˆ˜ ë°˜ë“œì‹œ ì¶”ê°€í•  ê²ƒ
+        return baseSpeed * currentSpeedMultiplier;
     }
 }
-
-

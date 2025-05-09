@@ -108,10 +108,12 @@ public class GameManager : MonoBehaviour
         _score = 0;
     }
 
-
-
+    public float GetCurrentGameSpeed()
+    {
+        return 3f; // 현재는 임시값, 추후 게임 진행에 따라 증가하도록 변경 가능
+    }
 
     //TODO:게임오버 조건 만들기 , UI만들고 연결하기(UI매니저로 실시)
     //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
-   
+
 }
