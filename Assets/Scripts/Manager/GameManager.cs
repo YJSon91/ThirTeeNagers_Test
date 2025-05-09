@@ -19,15 +19,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
+    //점수 프로퍼티
     public int score
     {
         get { return _score; }
         set { _score = value; }
     }
     [SerializeField] private int _currentStage = 1;        //스테이지 번호
+    //스테이지 번호 프로퍼티
     public int currentStage { get { return _currentStage; } }
     [SerializeField] private float _baseSurvivalTime = 30f;     //버텨야 하는 시간 default
-    [SerializeField] private float _requiredSurvivalTime = 0f;
+    [SerializeField] private float _requiredSurvivalTime = 0f;  //실제 버텨야하는 시간
     [SerializeField] private float _increaseDuration = 10f;  //스테이지 거듭할 수록 늘어날 시간 증가값
     [SerializeField] private int _increaseSpeed = 1;   //스테이지 거듭할 수록 스피드 증가값
 
@@ -45,8 +47,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        survivalTimeSlider.minValue = 0;
+        //시작할때 슬라이더 밸류값 설정
+        survivalTimeSlider.minValue = 0;                
         survivalTimeSlider.maxValue = _requiredSurvivalTime;
         survivalTimeSlider.value = _requiredSurvivalTime;
 
@@ -57,10 +59,12 @@ public class GameManager : MonoBehaviour
     {
 
 
+        //디버그용 스테이지 스타트 
         if (_isStageClear && Input.GetKeyDown(KeyCode.Space))
         {
             StageStart();
         }
+
         //게임오버나 스테이지 클리어가 true면 아무것도 하지 않고 리턴
         if (_isGameOver || _isStageClear)
         {
@@ -78,7 +82,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        //아직 미정
         //게임오버 로직
         if (_player.CurrentHealth <= 0)
         {
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
     {
         _requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //스테이지마다 버텨야하는 시간값을 갱신
 
+        //시작할때 슬라이더 밸류값 설정
         survivalTimeSlider.minValue = 0;
         survivalTimeSlider.maxValue = _requiredSurvivalTime;
         survivalTimeSlider.value = _requiredSurvivalTime;
@@ -149,7 +153,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    //TODO:게임오버 조건 만들기 , UI만들고 연결하기(UI매니저로 실시)
-    //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
+    //TODO: UI만들고 연결하기(UI매니저로 실시)
+
 
 }
