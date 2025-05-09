@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }        //싱글톤 인스턴스 변수
 
     //아직 미정
-    //[SerializeField] private Player _player;       //게임오버 및 대미지 처리를 위한 player 가져옴
+    //[SerializeField] private Player _player;       //게임오버를 위한 player 가져옴
 
 
 
@@ -108,14 +108,6 @@ public class GameManager : MonoBehaviour
         _score = 0;
     }
 
-
-
-    //아직 미정
-    //대미지 처리 메서드
-    //public void Damage()
-    //{
-    //    _player.currentHP -= 1;
-    //}
 
 
 
