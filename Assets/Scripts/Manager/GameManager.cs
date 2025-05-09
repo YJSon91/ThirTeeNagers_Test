@@ -1,28 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }        //½Ì±ÛÅæ ÀÎ½ºÅÏ½º º¯¼ö
+    public static GameManager Instance { get; private set; }        //ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜
+    
 
-    //¾ÆÁ÷ ¹ÌÁ¤
-    //[SerializeField] private Player _player;       //°ÔÀÓ¿À¹ö¸¦ À§ÇÑ player °¡Á®¿È
-
-
-
-    [SerializeField] private float _stageTimer = 0;    //½Ã°£ º¯¼ö
-    [SerializeField] private bool _isGameOver = false;     //°ÔÀÓ¿À¹ö È®ÀÎ ºÒ¸®¾ğ
-    [SerializeField] private bool _isStageClear = false;   //½ºÅ×ÀÌÁö Å¬¸®¾î È®ÀÎ ºÒ¸®¾ğ
-    [SerializeField] private int _score = 0;    //Á¡¼ö º¯¼ö
-    [SerializeField] private int _currentStage = 1;        //½ºÅ×ÀÌÁö ¹øÈ£
-    [SerializeField] private float _requiredSurvivalTime = 30f;   //¹öÅß¾ß ÇÏ´Â ½Ã°£ default
-    [SerializeField] private float _increaseDuration = 10f;  //½ºÅ×ÀÌÁö °ÅµìÇÒ ¼ö·Ï ´Ã¾î³¯ ½Ã°£ Áõ°¡°ª
-
-    [SerializeField] private int _fakeHP = 3; // µğ¹ö±×¿ë Ã¼·Â
+    //ì¸ìŠ¤í™í„°ì—ì„œ ê°€ì ¸ì˜¬ ìˆ˜ ìˆë„ë¡ ì‹œë¦¬ì–¼ë¼ì´ì¦ˆí•„ë“œ ì„¤ì •
+    [SerializeField] private PlayerState _player;       //ê²Œì„ì˜¤ë²„ë¥¼ ìœ„í•œ player ê°€ì ¸ì˜´
+    [SerializeField] private Slider survivalTimeSlider;          //ì‚´ì•„ë‚¨ëŠ” ì‹œê°„ í‘œí˜„ ìŠ¬ë¼ì´ë”
+    [SerializeField] private Text scoreTxt;     //ì ìˆ˜ í…ìŠ¤íŠ¸
 
 
-    //°ÔÀÓ ¸Å´ÏÀú ½Ì±ÛÅæ ÆĞÅÏ
+
+    [SerializeField] private bool _isGameOver = false;     //ê²Œì„ì˜¤ë²„ í™•ì¸ ë¶ˆë¦¬ì–¸
+    [SerializeField] private bool _isStageClear = false;   //ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ í™•ì¸ ë¶ˆë¦¬ì–¸
+    [SerializeField] private int _score = 0;    //ì ìˆ˜ ë³€ìˆ˜
+
+    //ì ìˆ˜ í”„ë¡œí¼í‹°
+    public int score
+    {
+        get { return _score; }
+        set { _score = value; }
+    }
+
+    [SerializeField] private int _currentStage = 1;        //ìŠ¤í…Œì´ì§€ ë²ˆí˜¸
+    //ìŠ¤í…Œì´ì§€ ë²ˆí˜¸ í”„ë¡œí¼í‹°
+    public int currentStage { get { return _currentStage; } }
+
+    [SerializeField] private float _baseSurvivalTime = 30f;     //ë²„í…¨ì•¼ í•˜ëŠ” ì‹œê°„ default
+    [SerializeField] private float _requiredSurvivalTime = 0f;  //ì‹¤ì œ ë²„í…¨ì•¼í•˜ëŠ” ì‹œê°„
+    [SerializeField] private float _increaseDuration = 10f;  //ìŠ¤í…Œì´ì§€ ê±°ë“­í•  ìˆ˜ë¡ ëŠ˜ì–´ë‚  ì‹œê°„ ì¦ê°€ê°’
+    [SerializeField] private int _increaseSpeed = 1;   //ìŠ¤í…Œì´ì§€ ê±°ë“­í•  ìˆ˜ë¡ ìŠ¤í”¼ë“œ ì¦ê°€ê°’
+
+
+
+    //ê²Œì„ ë§¤ë‹ˆì € ì‹±ê¸€í†¤ íŒ¨í„´
     private void Awake()
     {
         if (Instance == null)
@@ -34,45 +50,72 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //ì‹œì‘í• ë•Œ ìŠ¬ë¼ì´ë” ë°¸ë¥˜ê°’ ì„¤ì •
+        survivalTimeSlider.minValue = 0;                
+        survivalTimeSlider.maxValue = _requiredSurvivalTime;
+        survivalTimeSlider.value = _requiredSurvivalTime;
+
+
     }
 
     private void Update()
     {
-        //°ÔÀÓ¿À¹ö³ª ½ºÅ×ÀÌÁö Å¬¸®¾î°¡ true¸é ¾Æ¹«°Íµµ ÇÏÁö ¾Ê°í ¸®ÅÏ
+
+
+        //ë””ë²„ê·¸ìš© ì ìˆ˜ ì¶”ê°€
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            AddScore(1);
+        }
+
+        //ë””ë²„ê·¸ìš© ìŠ¤í…Œì´ì§€ ìŠ¤íƒ€íŠ¸ 
+        if (_isStageClear && Input.GetKeyDown(KeyCode.Space))
+        {
+            StageStart();
+        }
+
+        //ê²Œì„ì˜¤ë²„ë‚˜ ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ê°€ trueë©´ ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•Šê³  ë¦¬í„´
         if (_isGameOver || _isStageClear)
         {
             return;
         }
-        _stageTimer += Time.deltaTime;      //½ºÅ×ÀÌÁö°¡ Áö¼ÓµÉ¶§ deltatimeÀ¸·Î ´õÇØÁÜ
+        _requiredSurvivalTime = Mathf.Max(0f, _requiredSurvivalTime - Time.deltaTime);     //ë²„í…¨ì•¼ ë˜ëŠ” ì‹œê°„ì„ deltaTimeë§Œí¼ ëºŒ(0ë³´ë‹¤ ë‚®ì€ ìˆ˜ê°€ ë‚˜ì˜¤ì§€ ì•Šê²Œ í•˜ê²Œ ìµœì €ê°’ì„ 0ìœ¼ë¡œ ì§€ì •)
+        survivalTimeSlider.value = _requiredSurvivalTime;           //ìŠ¬ë¼ì´ë”ì— í˜„ì¬ ë‚¨ì€ ìƒì¡´ ì‹œê°„ì„ ì‹œì‘ì ìœ¼ë¡œ ë°˜ì˜
 
-        //Debug.Log(_time);
 
-        //½ºÅ×ÀÌÁöÅ¸ÀÌ¸Ó°¡ ¹öÅß¾ßÇÏ´Â ½Ã°£º¸´Ù ³ô¾ÆÁö¸é ½ºÅ×ÀÌÁö Å¬¸®¾î
-        if (_stageTimer >= _requiredSurvivalTime)  
+        //ë²„í…¨ì•¼ í•˜ëŠ” ì‹œê°„ì´ 0ì´ ë˜ë©´ í´ë¦¬ì–´
+        if (_requiredSurvivalTime <= 0)  
         {
             StageClear();
+            return;
         }
 
-        //¾ÆÁ÷ ¹ÌÁ¤
-        //°ÔÀÓ¿À¹ö ·ÎÁ÷
-        if (_fakeHP <= 0)
+        //ê²Œì„ì˜¤ë²„ ë¡œì§
+        if (_player.CurrentHealth <= 0)
         {
             GameOver();
+            return;
         }
-
     }
 
-    //½ºÅ×ÀÌÁö ½ÃÀÛ½Ã ÃÊ±âÈ­
-    public void StageStart()
+    //ìŠ¤í…Œì´ì§€ ì‹œì‘ì‹œ ì´ˆê¸°í™”
+    private void StageStart()
     {
-        _isStageClear = false;
+        _requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //ìŠ¤í…Œì´ì§€ë§ˆë‹¤ ë²„í…¨ì•¼í•˜ëŠ” ì‹œê°„ê°’ì„ ê°±ì‹ 
+
+        //ì‹œì‘í• ë•Œ ìŠ¬ë¼ì´ë” ë°¸ë¥˜ê°’ ì„¤ì •
+        survivalTimeSlider.minValue = 0;
+        survivalTimeSlider.maxValue = _requiredSurvivalTime;
+        survivalTimeSlider.value = _requiredSurvivalTime;
+
+        //ë¶ˆê°’ ì´ˆê¸°í™”
+        _isStageClear = false;      
         _isGameOver = false;
-        _stageTimer = 0;
     }
 
 
-    //°ÔÀÓ¿À¹ö ¸Şµå
-    //TODO:°ÔÀÓ¿À¹ö ¾À È¤Àº UI¸¦ ¸¸µé°í ÄÑÁÖ±â
+    //ê²Œì„ì˜¤ë²„ ë©”ë“œ
+    //TODO:ê²Œì„ì˜¤ë²„ ì”¬ í˜¹ì€ UIë¥¼ ë§Œë“¤ê³  ì¼œì£¼ê¸°
     public void GameOver()
     {
         _isGameOver = true;
@@ -80,40 +123,53 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //½ºÅ×ÀÌÁö Å¬¸®¾î ¸Ş¼­µå
-    //TODO:½ºÅ×ÀÌÁö Å¬¸®¾î UI¸¦ ¸¸µé°í(´ÙÀ½ ½ºÅ×ÀÌÁö·Î °¥Áö ½ºÅ¸Æ®¾À?À¸·Î °¥Áö °áÁ¤) ÄÑÁÖ±â
+    //ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ë©”ì„œë“œ
+    //TODO:ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ UIë¥¼ ë§Œë“¤ê³ (ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ê°ˆì§€ ìŠ¤íƒ€íŠ¸ì”¬?ìœ¼ë¡œ ê°ˆì§€ ê²°ì •) ì¼œì£¼ê¸°
     public void StageClear()
     {
         _isStageClear = true;
         Debug.Log("StageClear");
-        _currentStage += 1;
-        _requiredSurvivalTime += _increaseDuration;
+        _currentStage += 1;             //ìŠ¤í…Œì´ì§€ ++
+
+        _player.PlayerSpeed += _increaseSpeed * _currentStage;              //í”Œë ˆì´ì–´ ì†ë„ëŠ” ì¦ê°€ê°’ * ìŠ¤í…Œì´ì§€(ì¶”í›„ì— ë³€ê²½í•´ì•¼ ë  ì‚¬í•­)
+
+
     }
 
 
-    //Á¡¼ö Ãß°¡ ¸Ş¼­µå
+    //ì ìˆ˜ ì¶”ê°€ ë©”ì„œë“œ
     public void AddScore(int score)
     {
         _score += score;
+        scoreTxt.text = _score.ToString();       //ì¶”ê°€ëœ ìŠ¤ì½”ì–´ í…ìŠ¤íŠ¸ë¡œ ë³€í™˜
     }
 
-    //·Îºñ -> °ÔÀÓÀ¸·Î µé¾î°¥¶§ ¿ÏÀü ÃÊ±âÈ­ ¸Ş¼­µå
+    //ë¡œë¹„ -> ê²Œì„ìœ¼ë¡œ ë“¤ì–´ê°ˆë•Œ ì™„ì „ ì´ˆê¸°í™” ë©”ì„œë“œ
     public void InitGame()
     {
         _isStageClear = false;
         _isGameOver = false;
-        _stageTimer = 0f;
-        _currentStage = 0;
+        _currentStage = 1;
         _requiredSurvivalTime = 0f;
         _score = 0;
+        _player.PlayerSpeed = 3;
     }
 
     public float GetCurrentGameSpeed()
     {
-        return 3f; // ÇöÀç´Â ÀÓ½Ã°ª, ÃßÈÄ °ÔÀÓ ÁøÇà¿¡ µû¶ó Áõ°¡ÇÏµµ·Ï º¯°æ °¡´É
+        return 3f; // í˜„ì¬ëŠ” ì„ì‹œê°’, ì¶”í›„ ê²Œì„ ì§„í–‰ì— ë”°ë¼ ì¦ê°€í•˜ë„ë¡ ë³€ê²½ ê°€ëŠ¥
     }
 
-    //TODO:°ÔÀÓ¿À¹ö Á¶°Ç ¸¸µé±â , UI¸¸µé°í ¿¬°áÇÏ±â(UI¸Å´ÏÀú·Î ½Ç½Ã)
-    //player½ºÅ©¸³Æ® ¿¬°á ÈÄ([serializeField]·Î º¯¼ö¸¦ ¸¸µç ÈÄ ÀÎ½ºÆåÅÍ¿¡¼­ Á÷Á¢ ¿¬°á
+    //TODO: UIë§Œë“¤ê³  ì—°ê²°í•˜ê¸°(UIë§¤ë‹ˆì €ë¡œ ì‹¤ì‹œ)
+    //TODO:ê²Œì„ì˜¤ë²„ ì¡°ê±´ ë§Œë“¤ê¸° , UIë§Œë“¤ê³  ì—°ê²°í•˜ê¸°(UIë§¤ë‹ˆì €ë¡œ ì‹¤ì‹œ)
+    //playerìŠ¤í¬ë¦½íŠ¸ ì—°ê²° í›„([serializeField]ë¡œ ë³€ìˆ˜ë¥¼ ë§Œë“  í›„ ì¸ìŠ¤í™í„°ì—ì„œ ì§ì ‘ ì—°ê²°
+
+
+
+
+
+    
+
+
 
 }
