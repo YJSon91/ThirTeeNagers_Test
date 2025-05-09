@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f946e0d140d132479a6e258832dffb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedChangeDuration: 5
+  speedChangeDuration: 3
 --- !u!1 &1029123678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1106,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 266256971760185082, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1085917936808382106, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1150,6 +1154,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6358592080298298113, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6835887563489811336, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
       propertyPath: m_Name
       value: Itemspawner(put_in_mainscene)
@@ -1157,6 +1165,14 @@ PrefabInstance:
     - target: {fileID: 6955944705846711484, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549243407866638162, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 935364274}
+    - target: {fileID: 7549243407866638162, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: itemLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

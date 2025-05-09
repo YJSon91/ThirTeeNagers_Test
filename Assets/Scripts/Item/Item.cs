@@ -16,8 +16,8 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        // 아이템이 생성된 후 5초가 지나면 자동으로 파괴됨 (플레이어가 안 먹었을 경우 대비)
-        Destroy(gameObject, 5f);
+        // 아이템이 생성된 후 10초가 지나면 자동으로 파괴됨 (플레이어가 안 먹었을 경우 대비)
+        Destroy(gameObject, 10f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -32,41 +32,48 @@ public class PlayerHandler : PlayerState
             Debug.Log("PlayerItemInteraction 스크립트가 없습니다.");
         }
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            TakeDamage(1);
+            TakeDamage(1); // 테스트용 데미지 입력
         }
     }
 
     private void FixedUpdate()
     {
-        if (isDead) return; //플레이어가 죽은 상태면 아무것도 안하고 빠져나간다.
+        if (isDead) return; // 플레이어가 죽은 상태면 아무것도 안 함
 
-        Vector3 velocity = _rigidbody2D.velocity; // RigidBody2D에 있는 velocity를 복사
+        Vector3 velocity = _rigidbody2D.velocity;
 
-
-        //velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();//
-
-        animator.SetBool("IsRun", true);
-
-        if (isJump) // 플레이어가 점프 상태라면
+        // 아이템 속도 효과를 반영한 현재 속도 계산
+        if (itemInteraction != null)
         {
-            velocity.y += JumpForce; // JumForce 만큼 더해줌
-            animator.SetBool("IsJump", true);
-            isJump = false; // 그러고 점프상태를 false로 만들어서 점프를 끝냄
+            velocity.x = itemInteraction.GetCurrentSpeed();
+        }
+        else
+        {
+            velocity.x = PlayerSpeed; // fallback
         }
 
+        animator.SetBool("IsRun", true); // 기본 상태는 달리기
+
+        if (isJump)
+        {
+            velocity.y += JumpForce;
+            animator.SetBool("IsJump", true);
+            isJump = false;
+        }
+
+        // 낙하 중일 때 애니메이션 처리
         if (_rigidbody2D.velocity.y < -0.1f)
         {
-            animator.SetBool("IsJump", false);  // 꼭 같이 꺼주기!
+            animator.SetBool("IsJump", false);
             animator.SetBool("IsFall", true);
         }
 
-
-        _rigidbody2D.velocity = velocity; //변경된 값들을 다시 rigidbody2D.velocity에 넣는다
-
+        _rigidbody2D.velocity = velocity; // 실제 속도 적용
     }
 
     void OnJump(InputValue inputValue)
@@ -80,12 +87,11 @@ public class PlayerHandler : PlayerState
 
     public void TakeDamage(int damage)
     {
-
-        CurrentHealth -= damage;  // 현재체력 감소 시킴
+        CurrentHealth -= damage;
         StartCoroutine(HitEffect());
         animator.SetTrigger("IsHit");
-        if (CurrentHealth <= 0)  // 현재체력이 0이되면 Die메서드 실행
 
+        if (CurrentHealth <= 0)
         {
             Die();
         }
@@ -98,14 +104,12 @@ public class PlayerHandler : PlayerState
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
-        Debug.Log(CurrentJumpCount);     ///////////// 테스트용 코드(점프 횟수 확인) 
-        collision.gameObject.CompareTag("Ground"); // 충돌체의 태그가 "Ground"면
-        animator.SetBool("IsJump", false);
-        animator.SetBool("IsFall", false);
-        CurrentJumpCount = 0;    //충돌체에 닿을 경우 점프 횟수 초기화
-        Debug.Log(CurrentJumpCount);    ///////////// 테스트용 코드(점프 횟수 확인)
-
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            animator.SetBool("IsJump", false);
+            animator.SetBool("IsFall", false);
+            CurrentJumpCount = 0;
+        }
     }
 
     private IEnumerator HitEffect()
