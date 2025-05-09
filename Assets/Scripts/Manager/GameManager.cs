@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     //인스펙터에서 가져올 수 있도록 시리얼라이즈필드 설정
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
-    [SerializeField] private UnityEngine.UI.Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
+    [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
+    [SerializeField] private Text scoreTxt;     //점수 텍스트
 
 
 
@@ -58,6 +60,12 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
 
+
+        //디버그용 점수 추가
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            AddScore(1);
+        }
 
         //디버그용 스테이지 스타트 
         if (_isStageClear && Input.GetKeyDown(KeyCode.Space))
@@ -133,6 +141,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int score)
     {
         _score += score;
+        scoreTxt.text = _score.ToString();       //추가된 스코어 텍스트로 변환
     }
 
     //로비 -> 게임으로 들어갈때 완전 초기화 메서드
