@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }        //싱글톤 인스턴스 변수
 
     //아직 미정
-    //[SerializeField] private Player _player;       //게임오버를 위한 player 가져옴
+    [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
 
 
 
@@ -15,11 +15,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
+    public int score
+    {
+        get { return _score; }
+        set { _score = value; }
+    }
     [SerializeField] private int _currentStage = 1;        //스테이지 번호
+    public int currentStage { get { return _currentStage; } }
     [SerializeField] private float _requiredSurvivalTime = 30f;   //버텨야 하는 시간 default
     [SerializeField] private float _increaseDuration = 10f;  //스테이지 거듭할 수록 늘어날 시간 증가값
 
-    [SerializeField] private int _fakeHP = 3; // 디버그용 체력
 
 
     //게임 매니저 싱글톤 패턴
@@ -34,6 +39,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
     }
 
     private void Update()
@@ -55,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         //아직 미정
         //게임오버 로직
-        if (_fakeHP <= 0)
+        if (_player.CurrentHealth <= 0)
         {
             GameOver();
         }
