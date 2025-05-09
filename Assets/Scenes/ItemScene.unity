@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 657310094}
-  - component: {fileID: 657310093}
+  - component: {fileID: 657310095}
   m_Layer: 0
   m_Name: Itemspawner
   m_TagString: Untagged
@@ -171,26 +171,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &657310093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657310092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b9544626fdf314b8b6a715f753141a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1794011609}
-  - {fileID: 1674779124}
-  - {fileID: 200456694}
-  scoreItemPrefab: {fileID: 8457085573671841903, guid: 47a4073cef0e4064e8e4bc2a3a283a37, type: 3}
-  healItemPrefab: {fileID: 6082592532687699888, guid: bfc27fdebbfcd0d42a2800cfba9f8617, type: 3}
-  speedUpItemPrefab: {fileID: 2411736558553887857, guid: 151ba659e88485443b9f15c9802788ed, type: 3}
-  speedDownItemPrefab: {fileID: 4652289120074887402, guid: b6af84190955af044849ec91523cc5bb, type: 3}
 --- !u!4 &657310094
 Transform:
   m_ObjectHideFlags: 0
@@ -209,6 +189,21 @@ Transform:
   - {fileID: 200456694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &657310095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657310092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f946e0d140d132479a6e258832dffb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpeed: 5
+  speedChangeDuration: 5
+  maxHealth: 3
 --- !u!1 &1641747595
 GameObject:
   m_ObjectHideFlags: 0
