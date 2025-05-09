@@ -1,44 +1,51 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
-/*
- * PlayerItemInteraction.cs
- * -------------------------
- * ÀÌ ½ºÅ©¸³Æ®´Â ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ°ú Ãæµ¹ÇßÀ» ¶§
- * Ã¼·Â Áõ°¡, ¼Óµµ Áõ°¡/°¨¼Ò µîÀÇ È¿°ú¸¦ Àû¿ëÇÏ´Â Àü¿ë ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
- * 
- * [»ç¿ë ¹æ¹ı]
- * 1. ÀÌ ½ºÅ©¸³Æ®¸¦ Player ¿ÀºêÁ§Æ®¿¡ ºÙÀÔ´Ï´Ù.
- * 2. Item.cs ½ºÅ©¸³Æ®¿¡¼­ Ãæµ¹ÇÑ ´ë»ó¿¡°Ô ÀÌ ½ºÅ©¸³Æ®¸¦ GetComponent·Î °¡Á®¿É´Ï´Ù.
- *    ¿¹:
- *       PlayerItemInteraction itemHandler = collision.GetComponent<PlayerItemInteraction>();
- *       if (itemHandler != null)
- *       {
- *           itemHandler.IncreaseHealth(1); // Ã¼·Â +1
- *           itemHandler.ChangeMovementSpeed(true); // °¡¼Ó
- *       }
- * 
- * [ÁÖÀÇ »çÇ×]
- * - ÀÌ ½ºÅ©¸³Æ®´Â PlayerController¿Í ºĞ¸®µÇ¾î µ¶¸³ÀûÀ¸·Î ºÙÀÏ ¼ö ÀÖ½À´Ï´Ù.
- * - Start()¿¡¼­ ÃÊ±â°ª ÀÚµ¿ ¼³Á¤ (currentSpeed, currentHealth)
- */
-
+// í”Œë ˆì´ì–´ê°€ ì•„ì´í…œ íš¨ê³¼(ì†ë„ ë°°ìœ¨)ë¥¼ ë°›ëŠ” ì²˜ë¦¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
+// GameManagerì˜ ê¸°ë³¸ ì†ë„ì— ë°°ìœ¨ì„ ê³±í•´ ì¼ì‹œì ì¸ ì†ë„ ë³€í™”ë¥¼ ì ìš©í•œë‹¤
 public class PlayerItemInteraction : MonoBehaviour
 {
-    [Header("¾ÆÀÌÅÛ È¿°ú ¼³Á¤")]
-    [SerializeField] private float defaultSpeed = 5f;
-    [SerializeField] private float speedChangeDuration = 5f;
-    [SerializeField] private int maxHealth = 3;
+    [Header("ì†ë„ íš¨ê³¼ ì§€ì† ì‹œê°„ (ì´ˆ)")]
+    [SerializeField] private float speedChangeDuration = 5f; // ì†ë„ ì•„ì´í…œ íš¨ê³¼ê°€ ìœ ì§€ë˜ëŠ” ì‹œê°„ (ì´ˆ)
 
-    private float currentSpeed;
-    private int currentHealth;
+    // í˜„ì¬ ì†ë„ ë°°ìœ¨ (1.0f = ì •ìƒ ì†ë„, 1.5f = 1.5ë°° ë¹ ë¦„, 0.5f = ì ˆë°˜ ì†ë„)
+    private float currentSpeedMultiplier = 1f;
+
+    // í˜„ì¬ ì‹¤í–‰ ì¤‘ì¸ ì†ë„ ì½”ë£¨í‹´ì„ ì €ì¥ (ì¤‘ë³µ íš¨ê³¼ ë°©ì§€ìš©)
     private Coroutine speedCoroutine;
 
-    private void Start()
+    // ì†ë„ ì•„ì´í…œ íš¨ê³¼ë¥¼ ì ìš©í•˜ëŠ” í•¨ìˆ˜
+    // isSpeedUpì´ trueë©´ ê°€ì†, falseë©´ ê°ì†
+    public void ChangeMovementSpeed(bool isSpeedUp)
     {
-        currentSpeed = defaultSpeed;
-        currentHealth = maxHealth;
+        // ê°€ì†ì´ë©´ 1.5ë°°, ê°ì†ì´ë©´ 0.5ë°° ë°°ìœ¨ ì ìš©
+        float multiplier = isSpeedUp ? 1.5f : 0.5f;
+
+        // ê¸°ì¡´ì— ì‹¤í–‰ ì¤‘ì¸ íš¨ê³¼ê°€ ìˆìœ¼ë©´ ì¤‘ë‹¨ (ì¤‘ì²© ë°©ì§€)
+        if (speedCoroutine != null)
+        {
+            StopCoroutine(speedCoroutine);
+        }
+
+        // ìƒˆë¡œìš´ ì†ë„ ë°°ìœ¨ ì½”ë£¨í‹´ ì‹¤í–‰
+        speedCoroutine = StartCoroutine(ApplySpeedMultiplierTemporarily(multiplier));
+    }
+
+    // ì¼ì • ì‹œê°„ ë™ì•ˆ ë°°ìœ¨ì„ ì ìš©í•˜ê³  ë‹¤ì‹œ 1.0fë¡œ ë³µì›í•˜ëŠ” ì½”ë£¨í‹´
+    private IEnumerator ApplySpeedMultiplierTemporarily(float multiplier)
+    {
+        currentSpeedMultiplier = multiplier; // ìƒˆë¡œìš´ ë°°ìœ¨ ì ìš©
+
+        yield return new WaitForSeconds(speedChangeDuration); // ì„¤ì •ëœ ì‹œê°„ë§Œí¼ ëŒ€ê¸°
+
+        currentSpeedMultiplier = 1f; // ì‹œê°„ì´ ì§€ë‚˜ë©´ ë‹¤ì‹œ ì •ìƒ ì†ë„ë¡œ ë³µì›
+    }
+
+    // í˜„ì¬ ì´ë™ ì†ë„ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+    // GameManagerì— ìˆëŠ” í˜„ì¬ ê¸°ë³¸ ì†ë„ì— ë°°ìœ¨ì„ ê³±í•´ì„œ ìµœì¢… ì†ë„ë¥¼ ê³„ì‚°
+    public float GetCurrentSpeed()
+    {
+        float baseSpeed = GameManager.Instance.GetCurrentGameSpeed(); // GameManagerì—ì„œ í˜„ì¬ ê¸°ë³¸ ì†ë„ ê°€ì ¸ì˜´
+        return baseSpeed * currentSpeedMultiplier; // ìµœì¢… ì†ë„ = ê¸°ë³¸ ì†ë„ Ã— ë°°ìœ¨
     }
 }
-
-
