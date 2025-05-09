@@ -13,7 +13,7 @@ public class PlayerHandler : PlayerState
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         if (animator == null)
         {
             Debug.Log("애니메이터가 할당되지 않았습니다.");
