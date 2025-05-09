@@ -267,6 +267,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Itemspawner
       objectReference: {fileID: 0}
+    - target: {fileID: 7549243407866638162, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549243407866638162, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549243407866638162, guid: 7829a09c790ffe9479043277ee83186c, type: 3}
+      propertyPath: spawnPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

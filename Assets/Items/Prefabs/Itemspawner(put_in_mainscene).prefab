@@ -150,4 +150,4 @@ MonoBehaviour:
   speedDownItemPrefab: {fileID: 4652289120074887402, guid: b6af84190955af044849ec91523cc5bb, type: 3}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
