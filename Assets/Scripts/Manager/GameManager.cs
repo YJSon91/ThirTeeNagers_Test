@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         _requiredSurvivalTime = Mathf.Max(0f, _requiredSurvivalTime - Time.deltaTime);     //버텨야 되는 시간을 deltaTime만큼 뺌(0보다 낮은 수가 나오지 않게 하게 최저값을 0으로 지정)
-        survivalTimeSlider.value = _requiredSurvivalTime;
+        survivalTimeSlider.value = _requiredSurvivalTime;           //슬라이더에 현재 남은 생존 시간을 시작적으로 반영
 
 
         //버텨야 하는 시간이 0이 되면 클리어
