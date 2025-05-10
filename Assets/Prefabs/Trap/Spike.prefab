@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5455378348271432914}
   - component: {fileID: 4451538059201961161}
   - component: {fileID: 2340713511652944323}
+  - component: {fileID: -4247140212295910729}
   m_Layer: 0
   m_Name: Spike
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,3 +137,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4247140212295910729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139581305553915751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca8f9bf9ee56414187902762e90a401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 2
