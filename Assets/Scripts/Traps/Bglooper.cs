@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Bglooper : MonoBehaviour
 {
-    
+
 
     public int obstacleCount = 0; // 장애물의 개수
     public Vector3 obstacleLastPosition = Vector3.zero; // 마지막으로 배치된 장애물의 위치
@@ -24,16 +24,18 @@ public class Bglooper : MonoBehaviour
         {
             // SetRandomPlace 함수는 각 장애물의 위치를 이전 장애물 위치를 기반으로 설정함
             obstacleLastPosition = obstacles[i].SetRandomPlace(obstacleLastPosition, obstacleCount);
+            Debug.Log("오브젝트 갯수:" + obstacleCount);
         }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         // 충돌한 객체의 이름을 디버그 로그에 출력
-       // Debug.Log("Triggered: " + collision.name);
+        // Debug.Log("Triggered: " + collision.name);
 
         if (collision.CompareTag("Ground"))
         {
+            Debug.Log("Bg Check.");
             float widthOfBgObject = ((BoxCollider2D)collision).size.x;
             Vector3 pos = collision.transform.position;
 
@@ -42,12 +44,13 @@ public class Bglooper : MonoBehaviour
             return;
         }
         // 충돌한 객체가 Obstacle인지 확인
-        Obstacle obstacle = collision.GetComponent<Obstacle>();
+        Obstacle obstacle = collision.GetComponentInParent<Obstacle>();
         if (obstacle)
         {
+            Debug.Log("Object Check");
             // 장애물이 충돌 시 랜덤 위치로 재배치
             obstacleLastPosition = obstacle.SetRandomPlace(obstacleLastPosition, obstacleCount);
-            
+
         }
     }
 }

@@ -1329,6 +1329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492619510}
+  - component: {fileID: 1492619511}
   m_Layer: 0
   m_Name: Obstacles
   m_TagString: Untagged
@@ -1353,6 +1354,25 @@ Transform:
   - {fileID: 783146700}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1492619511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492619509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca8f9bf9ee56414187902762e90a401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highPosY: 1
+  lowPosY: -1
+  holeSizeMin: 1
+  holeSizeMax: 3
+  topObject: {fileID: 1502259131}
+  bottomObject: {fileID: 783146700}
+  widthPadding: 4
 --- !u!1001 &1502259130
 PrefabInstance:
   m_ObjectHideFlags: 0

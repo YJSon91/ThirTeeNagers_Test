@@ -101,17 +101,17 @@ public class PlayerHandler : PlayerState
     void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(CurrentJumpCount);     ///////////// 테스트용 코드(점프 횟수 확인) 
+        Debug.Log("현재 점프 수 :" + CurrentJumpCount);     ///////////// 테스트용 코드(점프 횟수 확인) 
 
         if (collision.gameObject.CompareTag("Ground")) // 충돌체의 태그가 "Ground"면
         {
             animator.SetBool("IsJump", false);
             animator.SetBool("IsFall", false);
             CurrentJumpCount = 0;    //충돌체에 닿을 경우 점프 횟수 초기화
-            Debug.Log(CurrentJumpCount);    ///////////// 테스트용 코드(점프 횟수 확인)
+            Debug.Log("현재 점프 수Two :" + CurrentJumpCount);    ///////////// 테스트용 코드(점프 횟수 확인)
         }
 
-      
+
 
     }
 

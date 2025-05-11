@@ -1,52 +1,54 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Obstacle : MonoBehaviour
 {
-    public float highPosY = 1f; // Àå¾Ö¹°ÀÌ ¹èÄ¡µÉ ¼ö ÀÖ´Â YÃà »óÇÑ¼±
-    public float lowPosY = -1f; // Àå¾Ö¹°ÀÌ ¹èÄ¡µÉ ¼ö ÀÖ´Â YÃà ÇÏÇÑ¼±
+    public float highPosY = 1f; // ì¥ì• ë¬¼ì´ ë°°ì¹˜ë  ìˆ˜ ìˆëŠ” Yì¶• ìƒí•œì„ 
+    public float lowPosY = -1f; // ì¥ì• ë¬¼ì´ ë°°ì¹˜ë  ìˆ˜ ìˆëŠ” Yì¶• í•˜í•œì„ 
 
-    public float holeSizeMin = 1f; // ±¸¸ÛÀÇ ÃÖ¼Ò Å©±â
-    public float holeSizeMax = 3f; // ±¸¸ÛÀÇ ÃÖ´ë Å©±â
+    public float holeSizeMin = 1f; // êµ¬ë©ì˜ ìµœì†Œ í¬ê¸°
+    public float holeSizeMax = 3f; // êµ¬ë©ì˜ ìµœëŒ€ í¬ê¸°
 
-    public Transform topObject; // Àå¾Ö¹° »ó´Ü ¿ÀºêÁ§Æ® (ÀÌ °´Ã¼¸¦ À§·Î ¹èÄ¡)
-    public Transform bottomObject; // Àå¾Ö¹° ÇÏ´Ü ¿ÀºêÁ§Æ® (ÀÌ °´Ã¼¸¦ ¾Æ·¡·Î ¹èÄ¡)
+    public Transform topObject; // ì¥ì• ë¬¼ ìƒë‹¨ ì˜¤ë¸Œì íŠ¸ (ì´ ê°ì²´ë¥¼ ìœ„ë¡œ ë°°ì¹˜)
+    public Transform bottomObject; // ì¥ì• ë¬¼ í•˜ë‹¨ ì˜¤ë¸Œì íŠ¸ (ì´ ê°ì²´ë¥¼ ì•„ë˜ë¡œ ë°°ì¹˜)
 
-    public float widthPadding = 4f; // °¢ Àå¾Ö¹° °£ÀÇ XÃà °£°İ (³Êºñ ÆĞµù)
+    public float widthPadding = 4f; // ê° ì¥ì• ë¬¼ ê°„ì˜ Xì¶• ê°„ê²© (ë„ˆë¹„ íŒ¨ë”©)
 
-    // Àå¾Ö¹°À» ·£´ı À§Ä¡¿¡ ¹èÄ¡ÇÏ´Â ÇÔ¼ö
+    // ì¥ì• ë¬¼ì„ ëœë¤ ìœ„ì¹˜ì— ë°°ì¹˜í•˜ëŠ” í•¨ìˆ˜
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
     {
-        // ±¸¸Û Å©±â ·£´ı ¼³Á¤ (min ~ max ¹üÀ§ ³»¿¡¼­)
+        // êµ¬ë© í¬ê¸° ëœë¤ ì„¤ì • (min ~ max ë²”ìœ„ ë‚´ì—ì„œ)
         float holeSize = Random.Range(holeSizeMin, holeSizeMax);
-        // ±¸¸Û Å©±â¸¦ ¹İÀ¸·Î ³ª´©¾î »ó´Ü°ú ÇÏ´Ü °´Ã¼ÀÇ Y À§Ä¡ ¼³Á¤
+        // êµ¬ë© í¬ê¸°ë¥¼ ë°˜ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ìƒë‹¨ê³¼ í•˜ë‹¨ ê°ì²´ì˜ Y ìœ„ì¹˜ ì„¤ì •
         float halfHoleSize = holeSize / 2f;
-        topObject.localPosition = new Vector3(0, halfHoleSize); // »ó´Ü °´Ã¼ÀÇ À§Ä¡
-        bottomObject.localPosition = new Vector3(0, -halfHoleSize); // ÇÏ´Ü °´Ã¼ÀÇ À§Ä¡
+        topObject.localPosition = new Vector3(0, halfHoleSize); // ìƒë‹¨ ê°ì²´ì˜ ìœ„ì¹˜
+        bottomObject.localPosition = new Vector3(0, -halfHoleSize); // í•˜ë‹¨ ê°ì²´ì˜ ìœ„ì¹˜
 
-        // ¸¶Áö¸· À§Ä¡¿¡¼­ XÃàÀ¸·Î °£°İÀ» ´õÇÑ »õ·Î¿î À§Ä¡ °è»ê
+        // ë§ˆì§€ë§‰ ìœ„ì¹˜ì—ì„œ Xì¶•ìœ¼ë¡œ ê°„ê²©ì„ ë”í•œ ìƒˆë¡œìš´ ìœ„ì¹˜ ê³„ì‚°
         Vector3 placePosition = lastPosition + new Vector3(widthPadding, 0);
-        // »õ·Î¿î À§Ä¡ÀÇ YÃàÀ» ·£´ı °ªÀ¸·Î ¼³Á¤ (lowPosY¿Í highPosY »çÀÌ)
+        // ìƒˆë¡œìš´ ìœ„ì¹˜ì˜ Yì¶•ì„ ëœë¤ ê°’ìœ¼ë¡œ ì„¤ì • (lowPosYì™€ highPosY ì‚¬ì´)
         placePosition.y = Random.Range(lowPosY, highPosY);
 
-        // Àå¾Ö¹°ÀÇ À§Ä¡¸¦ »õ·Î¿î À§Ä¡·Î ¼³Á¤
+        // ì¥ì• ë¬¼ì˜ ìœ„ì¹˜ë¥¼ ìƒˆë¡œìš´ ìœ„ì¹˜ë¡œ ì„¤ì •
         transform.position = placePosition;
 
-        // »õ·Î ¼³Á¤µÈ À§Ä¡¸¦ ¹İÈ¯
+        // ìƒˆë¡œ ì„¤ì •ëœ ìœ„ì¹˜ë¥¼ ë°˜í™˜
         return placePosition;
 
 
-    }// ÇÃ·¹ÀÌ¾î°¡ Àå¾Ö¹°¿¡ Ãæµ¹ ½Ã µ¥¹ÌÁö Ã³¸®ÇÒ ·ÎÁ÷ Ãß°¡
+    }// í”Œë ˆì´ì–´ê°€ ì¥ì• ë¬¼ì— ì¶©ëŒ ì‹œ ë°ë¯¸ì§€ ì²˜ë¦¬í•  ë¡œì§ ì¶”ê°€
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        // Ãæµ¹ÇÑ °´Ã¼ÀÇ ÀÌ¸§À» µğ¹ö±× ·Î±×¿¡ Ãâ·Â
+        // ì¶©ëŒí•œ ê°ì²´ì˜ ì´ë¦„ì„ ë””ë²„ê·¸ ë¡œê·¸ì— ì¶œë ¥
         Debug.Log("Triggered");
 
         PlayerHandler player = collision.GetComponent<PlayerHandler>();
-        if ((player))
+        if (player)
         {
+            Debug.Log("Damage Check");
             player.TakeDamage(1);
             Debug.Log("Damaged");
 

@@ -3,44 +3,44 @@ using System.Collections;
 
 /// <summary>
 /// [ItemSpawner.cs]
-/// ÇÃ·¹ÀÌ¾î ±âÁØ ÀÏÁ¤ °Å¸® ¾Õ¿¡¼­ ¾ÆÀÌÅÛÀ» ÁÖ±âÀûÀ¸·Î »ı¼ºÇÏ´Â ½ºÅ©¸³Æ®
-/// - Á¡¼ö, Ã¼·Â, ¼Óµµ ¾ÆÀÌÅÛÀ» °¢±â ´Ù¸¥ ÁÖ±â·Î »ı¼º
-/// - »ı¼º À§Ä¡´Â YÃà ¶óÀÎ Áß ¹«ÀÛÀ§ ¼±ÅÃ, XÃàÀº ÇÃ·¹ÀÌ¾î ±âÁØÀ¸·Î °íÁ¤ °Å¸® ¾Õ
-/// - ÇØ´ç À§Ä¡¿¡ ±âÁ¸ ¾ÆÀÌÅÛÀÌ ÀÖÀ» °æ¿ì ±âÁ¸ ¾ÆÀÌÅÛÀ» »èÁ¦ ÈÄ »õ ¾ÆÀÌÅÛ »ı¼º
+/// í”Œë ˆì´ì–´ ê¸°ì¤€ ì¼ì • ê±°ë¦¬ ì•ì—ì„œ ì•„ì´í…œì„ ì£¼ê¸°ì ìœ¼ë¡œ ìƒì„±í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
+/// - ì ìˆ˜, ì²´ë ¥, ì†ë„ ì•„ì´í…œì„ ê°ê¸° ë‹¤ë¥¸ ì£¼ê¸°ë¡œ ìƒì„±
+/// - ìƒì„± ìœ„ì¹˜ëŠ” Yì¶• ë¼ì¸ ì¤‘ ë¬´ì‘ìœ„ ì„ íƒ, Xì¶•ì€ í”Œë ˆì´ì–´ ê¸°ì¤€ìœ¼ë¡œ ê³ ì • ê±°ë¦¬ ì•
+/// - í•´ë‹¹ ìœ„ì¹˜ì— ê¸°ì¡´ ì•„ì´í…œì´ ìˆì„ ê²½ìš° ê¸°ì¡´ ì•„ì´í…œì„ ì‚­ì œ í›„ ìƒˆ ì•„ì´í…œ ìƒì„±
 /// </summary>
 public class ItemSpawner : MonoBehaviour
 {
-    [Header("½ºÆù À§Ä¡ (3°³ ¶óÀÎ, YÃà ±âÁØ)")]
+    [Header("ìŠ¤í° ìœ„ì¹˜ (3ê°œ ë¼ì¸, Yì¶• ê¸°ì¤€)")]
     [SerializeField] private Transform[] spawnPoints;
-    // YÃà ±âÁØÀ¸·Î ¾ÆÀÌÅÛÀ» ¹èÄ¡ÇÒ ¼ö ÀÖ´Â À§Ä¡µé (Low, Mid, High ¶óÀÎ)
+    // Yì¶• ê¸°ì¤€ìœ¼ë¡œ ì•„ì´í…œì„ ë°°ì¹˜í•  ìˆ˜ ìˆëŠ” ìœ„ì¹˜ë“¤ (Low, Mid, High ë¼ì¸)
 
-    [Header("¾ÆÀÌÅÛ ÇÁ¸®ÆÕ")]
-    [SerializeField] private GameObject scoreItemPrefab;     // Á¡¼ö ¾ÆÀÌÅÛ ÇÁ¸®ÆÕ
-    [SerializeField] private GameObject healItemPrefab;      // Ã¼·Â È¸º¹ ¾ÆÀÌÅÛ ÇÁ¸®ÆÕ
-    [SerializeField] private GameObject speedUpItemPrefab;   // ¼Óµµ Áõ°¡ ¾ÆÀÌÅÛ ÇÁ¸®ÆÕ
-    [SerializeField] private GameObject speedDownItemPrefab; // ¼Óµµ °¨¼Ò ¾ÆÀÌÅÛ ÇÁ¸®ÆÕ
+    [Header("ì•„ì´í…œ í”„ë¦¬íŒ¹")]
+    [SerializeField] private GameObject scoreItemPrefab;     // ì ìˆ˜ ì•„ì´í…œ í”„ë¦¬íŒ¹
+    [SerializeField] private GameObject healItemPrefab;      // ì²´ë ¥ íšŒë³µ ì•„ì´í…œ í”„ë¦¬íŒ¹
+    [SerializeField] private GameObject speedUpItemPrefab;   // ì†ë„ ì¦ê°€ ì•„ì´í…œ í”„ë¦¬íŒ¹
+    [SerializeField] private GameObject speedDownItemPrefab; // ì†ë„ ê°ì†Œ ì•„ì´í…œ í”„ë¦¬íŒ¹
 
-    [Header("ÇÃ·¹ÀÌ¾î ¹× Ãæµ¹ ¼³Á¤")]
-    [SerializeField] private Transform playerTransform;       // ±âÁØÀÌ µÇ´Â ÇÃ·¹ÀÌ¾î À§Ä¡
-    [SerializeField] private float spawnOffsetX = 10f;        // ÇÃ·¹ÀÌ¾îº¸´Ù XÃàÀ¸·Î ¾Õ¿¡ »ı¼ºµÉ °Å¸®
-    [SerializeField] private LayerMask obstacleLayer;         // Àå¾Ö¹° °¨Áö¿ë ·¹ÀÌ¾î ("Obstacle")
-    [SerializeField] private LayerMask itemLayer;             // ±âÁ¸ ¾ÆÀÌÅÛ °¨Áö¿ë ·¹ÀÌ¾î ("Item")
+    [Header("í”Œë ˆì´ì–´ ë° ì¶©ëŒ ì„¤ì •")]
+    [SerializeField] private Transform playerTransform;       // ê¸°ì¤€ì´ ë˜ëŠ” í”Œë ˆì´ì–´ ìœ„ì¹˜
+    [SerializeField] private float spawnOffsetX = 10f;        // í”Œë ˆì´ì–´ë³´ë‹¤ Xì¶•ìœ¼ë¡œ ì•ì— ìƒì„±ë  ê±°ë¦¬
+    [SerializeField] private LayerMask obstacleLayer;         // ì¥ì• ë¬¼ ê°ì§€ìš© ë ˆì´ì–´ ("Obstacle")
+    [SerializeField] private LayerMask itemLayer;             // ê¸°ì¡´ ì•„ì´í…œ ê°ì§€ìš© ë ˆì´ì–´ ("Item")
 
     private void Start()
     {
-        // Á¡¼ö ¾ÆÀÌÅÛ: 0.2ÃÊ¸¶´Ù ¸Å¿ì ÀÚÁÖ »ı¼º
+        // ì ìˆ˜ ì•„ì´í…œ: 0.2ì´ˆë§ˆë‹¤ ë§¤ìš° ìì£¼ ìƒì„±
         StartCoroutine(SpawnRoutine(scoreItemPrefab, 0.2f));
 
-        // ¼Óµµ ¾ÆÀÌÅÛ: 10ÃÊ¸¶´Ù »ı¼ºµÇ¸ç, ¾÷/´Ù¿î Áß ¹«ÀÛÀ§ ¼±ÅÃ
+        // ì†ë„ ì•„ì´í…œ: 10ì´ˆë§ˆë‹¤ ìƒì„±ë˜ë©°, ì—…/ë‹¤ìš´ ì¤‘ ë¬´ì‘ìœ„ ì„ íƒ
         StartCoroutine(SpawnRoutine(null, 10f, true));
 
-        // Ã¼·Â ¾ÆÀÌÅÛ: 30ÃÊ¸¶´Ù »ı¼º
+        // ì²´ë ¥ ì•„ì´í…œ: 30ì´ˆë§ˆë‹¤ ìƒì„±
         StartCoroutine(SpawnRoutine(healItemPrefab, 30f));
     }
 
     private void LateUpdate()
     {
-        // ½ºÆ÷³Ê ¿ÀºêÁ§Æ®¸¦ Ç×»ó ÇÃ·¹ÀÌ¾î ¾ÕÂÊÀ¸·Î ÀÌµ¿
+        // ìŠ¤í¬ë„ˆ ì˜¤ë¸Œì íŠ¸ë¥¼ í•­ìƒ í”Œë ˆì´ì–´ ì•ìª½ìœ¼ë¡œ ì´ë™
         if (playerTransform != null)
         {
             Vector3 newPos = transform.position;
@@ -50,19 +50,19 @@ public class ItemSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// °øÅë ½ºÆù ·çÆ¾
-    /// - ÁöÁ¤µÈ °£°İ¸¶´Ù ¾ÆÀÌÅÛÀ» »ı¼º
-    /// - ¼Óµµ ¾ÆÀÌÅÛÀÎ °æ¿ì ¾÷/´Ù¿î Áß ÇÏ³ª¸¦ ¹«ÀÛÀ§·Î ¼±ÅÃ
+    /// ê³µí†µ ìŠ¤í° ë£¨í‹´
+    /// - ì§€ì •ëœ ê°„ê²©ë§ˆë‹¤ ì•„ì´í…œì„ ìƒì„±
+    /// - ì†ë„ ì•„ì´í…œì¸ ê²½ìš° ì—…/ë‹¤ìš´ ì¤‘ í•˜ë‚˜ë¥¼ ë¬´ì‘ìœ„ë¡œ ì„ íƒ
     /// </summary>
     private IEnumerator SpawnRoutine(GameObject fixedItem, float interval, bool isSpeedItem = false)
     {
-        yield return new WaitForSeconds(interval); // ÃÊ±â ¸ô¸² ¹æÁö¸¦ À§ÇÑ ´ë±â
+        yield return new WaitForSeconds(interval); // ì´ˆê¸° ëª°ë¦¼ ë°©ì§€ë¥¼ ìœ„í•œ ëŒ€ê¸°
 
         while (true)
         {
             GameObject toSpawn = fixedItem;
 
-            // ¼Óµµ ¾ÆÀÌÅÛÀÌ¸é ¾÷/´Ù¿î Áß ·£´ı ¼±ÅÃ
+            // ì†ë„ ì•„ì´í…œì´ë©´ ì—…/ë‹¤ìš´ ì¤‘ ëœë¤ ì„ íƒ
             if (isSpeedItem)
             {
                 toSpawn = Random.value > 0.5f ? speedUpItemPrefab : speedDownItemPrefab;
@@ -74,9 +74,9 @@ public class ItemSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾ÆÀÌÅÛÀ» Y¶óÀÎ Áß ¹«ÀÛÀ§ À§Ä¡¿¡ »ı¼º
-    /// - ÇØ´ç À§Ä¡¿¡ Àå¾Ö¹°ÀÌ ¾øÀ» °æ¿ì¸¸ »ı¼º
-    /// - ÇØ´ç À§Ä¡¿¡ ±âÁ¸ ¾ÆÀÌÅÛÀÌ ÀÖ´Ù¸é »èÁ¦ ÈÄ »õ·Î »ı¼º
+    /// ì•„ì´í…œì„ Yë¼ì¸ ì¤‘ ë¬´ì‘ìœ„ ìœ„ì¹˜ì— ìƒì„±
+    /// - í•´ë‹¹ ìœ„ì¹˜ì— ì¥ì• ë¬¼ì´ ì—†ì„ ê²½ìš°ë§Œ ìƒì„±
+    /// - í•´ë‹¹ ìœ„ì¹˜ì— ê¸°ì¡´ ì•„ì´í…œì´ ìˆë‹¤ë©´ ì‚­ì œ í›„ ìƒˆë¡œ ìƒì„±
     /// </summary>
     private void SpawnItemAtRandomPosition(GameObject itemPrefab)
     {
@@ -86,28 +86,28 @@ public class ItemSpawner : MonoBehaviour
 
         for (int i = 0; i < maxAttempts; i++)
         {
-            int index = Random.Range(0, spawnPoints.Length); // Y ¶óÀÎ Áß ÇÏ³ª ¼±ÅÃ
+            int index = Random.Range(0, spawnPoints.Length); // Y ë¼ì¸ ì¤‘ í•˜ë‚˜ ì„ íƒ
             float spawnY = spawnPoints[index].position.y;
             float spawnX = transform.position.x;
 
             Vector2 spawnPos = new Vector2(spawnX, spawnY);
 
-            // ÇØ´ç À§Ä¡¿¡ Àå¾Ö¹°ÀÌ ÀÖÀ¸¸é ½ºÅµ
+            // í•´ë‹¹ ìœ„ì¹˜ì— ì¥ì• ë¬¼ì´ ìˆìœ¼ë©´ ìŠ¤í‚µ
             bool isBlocked = Physics2D.OverlapCircle(spawnPos, 0.5f, obstacleLayer);
             if (isBlocked) continue;
 
-            // ÇØ´ç À§Ä¡¿¡ ±âÁ¸ ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é »èÁ¦
+            // í•´ë‹¹ ìœ„ì¹˜ì— ê¸°ì¡´ ì•„ì´í…œì´ ìˆìœ¼ë©´ ì‚­ì œ
             Collider2D overlap = Physics2D.OverlapCircle(spawnPos, 0.5f, itemLayer);
             if (overlap != null)
             {
-                Destroy(overlap.gameObject); // ¸ÕÀú ÀÖ´ø ¾ÆÀÌÅÛ Á¦°Å
+                Destroy(overlap.gameObject); // ë¨¼ì € ìˆë˜ ì•„ì´í…œ ì œê±°
             }
 
-            // ¾ÆÀÌÅÛ »ı¼º
+            // ì•„ì´í…œ ìƒì„±
             Instantiate(itemPrefab, spawnPos, Quaternion.identity);
             return;
         }
 
-        Debug.LogWarning("¾ÆÀÌÅÛ ½ºÆù ½ÇÆĞ: ¸ğµç ¶óÀÎ¿¡ Àå¾Ö¹°ÀÌ ÀÖÀ½");
+        Debug.LogWarning("ì•„ì´í…œ ìŠ¤í° ì‹¤íŒ¨: ëª¨ë“  ë¼ì¸ì— ì¥ì• ë¬¼ì´ ìˆìŒ");
     }
 }
