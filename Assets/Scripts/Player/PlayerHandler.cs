@@ -47,7 +47,7 @@ public class PlayerHandler : PlayerState
         Vector3 velocity = _rigidbody2D.velocity; // RigidBody2D에 있는 velocity를 복사
         velocity.x = PlayerSpeed;
 
-        velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();//
+        velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();
 
         animator.SetBool("IsRun", true);
 
@@ -75,6 +75,8 @@ public class PlayerHandler : PlayerState
         {
             isJump = inputValue.isPressed;
             CurrentJumpCount++;
+            Debug.Log("현재 점프" + CurrentJumpCount);
+            Debug.Log("맥스점프" + MaxJumpCount);
         }
     }
 
@@ -100,11 +102,16 @@ public class PlayerHandler : PlayerState
     {
 
         Debug.Log(CurrentJumpCount);     ///////////// 테스트용 코드(점프 횟수 확인) 
-        collision.gameObject.CompareTag("Ground"); // 충돌체의 태그가 "Ground"면
-        animator.SetBool("IsJump", false);
-        animator.SetBool("IsFall", false);
-        CurrentJumpCount = 0;    //충돌체에 닿을 경우 점프 횟수 초기화
-        Debug.Log(CurrentJumpCount);    ///////////// 테스트용 코드(점프 횟수 확인)
+
+        if (collision.gameObject.CompareTag("Ground")) // 충돌체의 태그가 "Ground"면
+        {
+            animator.SetBool("IsJump", false);
+            animator.SetBool("IsFall", false);
+            CurrentJumpCount = 0;    //충돌체에 닿을 경우 점프 횟수 초기화
+            Debug.Log(CurrentJumpCount);    ///////////// 테스트용 코드(점프 횟수 확인)
+        }
+
+      
 
     }
 
