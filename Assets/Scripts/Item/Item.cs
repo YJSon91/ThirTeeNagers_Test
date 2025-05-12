@@ -14,9 +14,11 @@ public class Item : MonoBehaviour
 {
     [SerializeField] private ItemType itemType; // 인스펙터에서 아이템 타입 선택
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private HealthUI healthUI;
 
     private void Start()
     {
+        healthUI = FindObjectOfType<HealthUI>();
         // 아이템이 생성된 후 5초가 지나면 자동으로 파괴됨 (플레이어가 안 먹었을 경우 대비)
         //Destroy(gameObject, 5f);
         GameObject playerobj = GameObject.FindWithTag("Player");                    //player 태그 찾기
@@ -60,6 +62,7 @@ public class Item : MonoBehaviour
 
             case ItemType.Heal:
                 playerState.CurrentHealth += 1; // 체력 +1 증가 (최대치 제한은 PlayerState에서 처리)
+                healthUI.UpdateHealtDisplay(playerState.CurrentHealth);
                 break;
 
             case ItemType.SpeedUp:

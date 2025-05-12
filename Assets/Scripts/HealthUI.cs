@@ -37,9 +37,9 @@ public class HealthUI : MonoBehaviour
             {
                 if(heartImages[i].sprite != emptyHeart)
                 {
-                    heartImages[i].sprite = emptyHeart;
                     if(heartAnimator != null)
                     {
+                        heartImages[i].sprite = emptyHeart;
                         heartAnimator.ResetTrigger("IsHit");
                         heartAnimator.SetTrigger("IsHit");
                     }
