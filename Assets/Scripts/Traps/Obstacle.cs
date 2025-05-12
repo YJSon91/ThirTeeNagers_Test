@@ -20,6 +20,7 @@ public class Obstacle : MonoBehaviour
     public float lowPosY = -1f;
 
     public float widthPadding = 4f;
+        
     public float widthPadding = 4.0f; // 장애물 간격
 
     // 장애물 위치 설정
