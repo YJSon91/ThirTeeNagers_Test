@@ -30,16 +30,16 @@ public class Obstacle : MonoBehaviour
         switch (obstacleType)
         {
             case ObstacleType.Fire:
-                placePosition.y = -0.9f; // 중간 라인 (예시)
+                placePosition.y = -1.5f; // 중간 라인 (예시)
                 break;
             case ObstacleType.Saw:
-                placePosition.y = -1.5f; // 아래쪽
+                placePosition.y = -2.0f; // 아래쪽
                 break;
             case ObstacleType.Spike:
-                placePosition.y = -1.15f;
+                placePosition.y = -1.75f;
                 break;
             case ObstacleType.SpikeHead:
-                placePosition.y = Random.Range(1.0f, highPosY); // 위쪽 랜덤
+                placePosition.y = Random.Range(lowPosY, highPosY); // 위쪽 랜덤
                 break;
            
         }
