@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
     [SerializeField] private Text scoreTxt;     //점수 텍스트
+    [SerializeField] private GameObject GameOverPanel;
 
 
 
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _isGameOver = true;
-        Debug.Log("GameOver");
+        GameOverPanel.SetActive(true);
     }
 
 
