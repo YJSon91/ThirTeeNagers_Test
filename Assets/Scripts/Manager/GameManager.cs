@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
+    [SerializeField] private bool _isPause = false;
     [SerializeField] private int _score = 0;    //점수 변수
 
     //점수 프로퍼티
@@ -96,6 +97,15 @@ public class GameManager : MonoBehaviour
             GameOver();
             return;
         }
+
+        if(_isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     //스테이지 시작시 초기화
@@ -165,6 +175,15 @@ public class GameManager : MonoBehaviour
     //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
 
 
+    public void Pause()
+    {
+        _isPause = true;
+    }
+
+    public void Resume()
+    {
+        _isPause = false;
+    }
 
 
 
