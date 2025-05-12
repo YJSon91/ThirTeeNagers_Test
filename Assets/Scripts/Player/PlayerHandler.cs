@@ -9,6 +9,7 @@ public class PlayerHandler : PlayerState
     Animator animator;
     Rigidbody2D _rigidbody2D;
     private HealthUI healthUI;
+    [SerializeField]private bool godMod = false;
 
     // 아이템 효과에 의한 속도 배율 적용용
     private PlayerItemInteraction itemInteraction;
@@ -43,7 +44,7 @@ public class PlayerHandler : PlayerState
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            TakeDamage(1, transform.position);
+            TakeDamage(1, transform.position,true);
         }
     }
 
@@ -89,9 +90,14 @@ public class PlayerHandler : PlayerState
         }
     }
 
-    public void TakeDamage(int damage, Vector2 hitSourcePosition)
+    public void TakeDamage(int damage, Vector2 hitSourcePosition, bool isDebug = false)
     {
-        if(isInvincible || isDead) return;  
+        if(isInvincible || isDead) return;
+        if (godMod && !isDebug)
+        {
+            Debug.Log("[GODMODE] 일반 피격 차단됨");
+            return;
+        }
         CurrentHealth -= damage;  // 현재체력 감소 시킴
         StartCoroutine(HitEffect());
         animator.SetTrigger("IsHit");

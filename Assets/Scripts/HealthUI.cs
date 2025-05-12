@@ -23,23 +23,27 @@ public class HealthUI : MonoBehaviour
     {
         for(int i = 0; i < heartImages.Length; i++)
         {
-            if(i<currentHP)
+            Animator heartAnimator = heartImages[i].GetComponent<Animator>();
+            if (i<currentHP)
             {
-                heartImages[i].sprite = fullHeart;
+                if (heartImages[i].sprite != fullHeart)
+                {
+                    heartImages[i].sprite = fullHeart;
+                    heartAnimator.ResetTrigger("IsHeal");
+                    heartAnimator.SetTrigger("IsHeal");
+                }
             }
             else
             {
                 if(heartImages[i].sprite != emptyHeart)
                 {
                     heartImages[i].sprite = emptyHeart;
-                    Animator heartAnimator = heartImages[i].GetComponent<Animator>();
                     if(heartAnimator != null)
                     {
                         heartAnimator.ResetTrigger("IsHit");
                         heartAnimator.SetTrigger("IsHit");
                     }
                 }
-                animator.SetTrigger("IsHit");
             }
         }
     }
