@@ -18,8 +18,6 @@ public class Obstacle : MonoBehaviour
 
     public float highPosY = 3f;
     public float lowPosY = -1f;
-
-    public float widthPadding = 4f;
         
     public float widthPadding = 4.0f; // 장애물 간격
 
