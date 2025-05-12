@@ -8,6 +8,7 @@ public class PlayerHandler : PlayerState
 {
     Animator animator;
     Rigidbody2D _rigidbody2D;
+    private HealthUI healthUI;
 
     // 아이템 효과에 의한 속도 배율 적용용
     private PlayerItemInteraction itemInteraction;
@@ -31,6 +32,10 @@ public class PlayerHandler : PlayerState
         {
             Debug.Log("PlayerItemInteraction 스크립트가 없습니다.");
         }
+        CurrentHealth = MaxHealth;
+        healthUI = FindObjectOfType<HealthUI>();
+        healthUI.SetMaxHealth(MaxHealth);
+
     }
     private void Update()
     {
@@ -88,6 +93,7 @@ public class PlayerHandler : PlayerState
         CurrentHealth -= damage;  // 현재체력 감소 시킴
         StartCoroutine(HitEffect());
         animator.SetTrigger("IsHit");
+        healthUI.UpdateHealtDisplay(CurrentHealth);
 
         Vector2 knockbackDir = (transform.position - (Vector3)hitSourcePosition).normalized;
         StartCoroutine(ApplkKnockback(knockbackDir));
