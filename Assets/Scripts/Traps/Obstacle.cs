@@ -49,7 +49,9 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.TryGetComponent<PlayerHandler>(out var player))
         {
-            //player.TakeDamage(1,vector2);
+            // hitsourceposition 이 뭔지 받아와서 벡터2자리에 넣어줘야함
+
+            //player.TakeDamage(1,vector2); 
         }
     }
 }
