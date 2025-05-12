@@ -7,6 +7,8 @@ public class PlayerItemInteraction : MonoBehaviour
 {
     [Header("속도 효과 지속 시간 (초)")]
     [SerializeField] private float speedChangeDuration = 5f; // 속도 아이템 효과가 유지되는 시간 (초)
+    [SerializeField] private GameObject activePaticlePrefab;
+    private GameObject activeParticle;
 
     // 현재 속도 배율 (1.0f = 정상 속도, 1.5f = 1.5배 빠름, 0.5f = 절반 속도)
     private float currentSpeedMultiplier = 1f;
@@ -47,5 +49,37 @@ public class PlayerItemInteraction : MonoBehaviour
     {
         float baseSpeed = GameManager.Instance.GetCurrentGameSpeed(); // GameManager에서 현재 기본 속도 가져옴
         return baseSpeed * currentSpeedMultiplier; // 최종 속도 = 기본 속도 × 배율
+    }
+
+    //이펙트 출력 메서드
+    public void PlayTrailEffect(float duration = 5f)
+    {
+        if (activeParticle != null) return;             //null이 아니라면 return
+        //파티클 위치 설정
+        Vector3 offset = new Vector3(-0.5f, -0.5f, 0f); 
+        Vector3 spawnPos = transform.position + offset;   
+        activeParticle = Instantiate(activePaticlePrefab,spawnPos, Quaternion.identity,transform);          //파티클 생성(transform을 부모로 지정해서 캐릭터를 따라다니게 만듦)
+
+        StartCoroutine(RemoveTrailAfterSeconds(duration));              //파티클이 생긴 이후 지정된 시간 이후에 제거하는 코루틴 실행
+    }
+
+    //이펙트 출력 후 중단 및 초기화 메서드
+    private IEnumerator RemoveTrailAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);               //파티클 표시된 상태로 second 만큼 유지
+
+        if(activeParticle != null)
+        {
+            ParticleSystem ps = activeParticle.GetComponent<ParticleSystem>();          //파티클 컴포넌트 가져오기
+            //파티클 존재 확인
+            if (ps != null)
+            {
+                ps.Stop();          //재생 중단
+                yield return new WaitForSeconds(ps.main.startLifetime.constantMax);     //startLifeTime만큼 대기 후 사라짐(자연스럽게 사라짐)
+            }
+
+            Destroy(activeParticle);                //파티클 오브젝트를 완전히 제거
+            activeParticle = null;                  //다시 실행하게 초기화
+        }
     }
 }

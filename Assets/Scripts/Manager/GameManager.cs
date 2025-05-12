@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }        //싱글톤 인스턴스 변수
-    
+
 
     //인스펙터에서 가져올 수 있도록 시리얼라이즈필드 설정
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         //시작할때 슬라이더 밸류값 설정
-        survivalTimeSlider.minValue = 0;                
+        survivalTimeSlider.minValue = 0;
         survivalTimeSlider.maxValue = _requiredSurvivalTime;
         survivalTimeSlider.value = _requiredSurvivalTime;
 
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
 
 
         //버텨야 하는 시간이 0이 되면 클리어
-        if (_requiredSurvivalTime <= 0)  
+        if (_requiredSurvivalTime <= 0)
         {
             StageClear();
             return;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         survivalTimeSlider.value = _requiredSurvivalTime;
 
         //불값 초기화
-        _isStageClear = false;      
+        _isStageClear = false;
         _isGameOver = false;
     }
 
@@ -165,12 +165,17 @@ public class GameManager : MonoBehaviour
     //TODO:게임오버 조건 만들기 , UI만들고 연결하기(UI매니저로 실시)
     //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
 
+    public void Pause()
+    {
+
+    }
+
+
+    public void Resume()
+    {
 
 
 
 
-    
-
-
-
+    }
 }
