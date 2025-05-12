@@ -20,10 +20,12 @@ public class Obstacle : MonoBehaviour
     public float lowPosY = -1f;
 
     public float widthPadding = 4f;
+    public float widthPadding = 4.0f; // 장애물 간격
 
     // 장애물 위치 설정
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
     {
+        widthPadding = Random.Range(2.0f, 4.0f);
         Vector3 placePosition = lastPosition + new Vector3(widthPadding, 0);
 
         switch (obstacleType)
