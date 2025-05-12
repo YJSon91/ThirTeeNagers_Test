@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         set { _score = value; }
     }
 
-    [SerializeField] private int _currentStage = 1;        //스테이지 번호
+    [SerializeField] public int _currentStage = 1;        //스테이지 번호
     //스테이지 번호 프로퍼티
     public int currentStage { get { return _currentStage; } }
 
