@@ -52,10 +52,6 @@ public class ButtonManager : MonoBehaviour
 #endif
     }
 
-    public void OpenSettingsButton()
-    {
-        SettingMenu.Instance.OpenSettings();
-    }
 
     public void PauseButtonActive()
     {

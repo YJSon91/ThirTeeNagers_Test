@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
         GameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
 
