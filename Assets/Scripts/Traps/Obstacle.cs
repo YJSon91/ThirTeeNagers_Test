@@ -49,7 +49,7 @@ public class Obstacle : MonoBehaviour
         if (player)
         {
             Debug.Log("Damage Check");
-            player.TakeDamage(1);
+            player.TakeDamage(1, collision.transform.position);
             Debug.Log("Damaged");
 
         }
