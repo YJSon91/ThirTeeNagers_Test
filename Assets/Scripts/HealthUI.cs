@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField] private Image[] heartImaages;
+    [SerializeField] private Image[] heartImages;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
+    [SerializeField] private Animator animator;
 
     private int maxHealth;
 
@@ -20,15 +21,25 @@ public class HealthUI : MonoBehaviour
 
     public void UpdateHealtDisplay(int currentHP)
     {
-        for(int i = 0; i < heartImaages.Length; i++)
+        for(int i = 0; i < heartImages.Length; i++)
         {
             if(i<currentHP)
             {
-                heartImaages[i].sprite = fullHeart;
+                heartImages[i].sprite = fullHeart;
             }
             else
             {
-                heartImaages[i].sprite = emptyHeart;
+                if(heartImages[i].sprite != emptyHeart)
+                {
+                    heartImages[i].sprite = emptyHeart;
+                    Animator heartAnimator = heartImages[i].GetComponent<Animator>();
+                    if(heartAnimator != null)
+                    {
+                        heartAnimator.ResetTrigger("IsHit");
+                        heartAnimator.SetTrigger("IsHit");
+                    }
+                }
+                animator.SetTrigger("IsHit");
             }
         }
     }
