@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
+    [SerializeField] private bool _isPause = false;         //일시정지 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
 
     //점수 프로퍼티
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -96,6 +96,15 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
             return;
+        }
+
+        if(_isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 
@@ -167,13 +176,13 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-
+        _isPause = true;
     }
 
 
     public void Resume()
     {
-
+        _isPause = false;
 
 
 
