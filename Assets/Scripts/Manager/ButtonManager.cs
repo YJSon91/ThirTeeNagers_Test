@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 
 public class ButtonManager : MonoBehaviour
 {
+    //버튼 오브젝트(인스펙터에서 할당)
     [Header("버튼")]
     [SerializeField] private Button GameOver_restartButton;
     [SerializeField] private Button Pause_startButton;
@@ -16,14 +17,14 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private Button SettingButton;
     [SerializeField] private Button CloseButton;
 
-
+    //패널 오브젝트(인스펙터에서 할당)
     [Header("패널")]
     [SerializeField] private GameObject PausePanel;
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject GameOverPanel;
 
 
-
+    //시작할때 초기화(비활성화가 default)
     private void Start()
     {
         PausePanel.SetActive(false);
@@ -31,18 +32,20 @@ public class ButtonManager : MonoBehaviour
         GameOverPanel.SetActive(false);
     }
 
-
+    //딜레이주고 리스타트 
     public void RestartGame()
     {
         StartCoroutine(RestartRoutine());
     }
-
+    //리스타트 메서드
     public IEnumerator RestartRoutine()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        yield return new WaitForSeconds(0.1f);
-        GameManager.Instance.InitGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
+        yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
+        GameManager.Instance.InitGame();                                            //게임매니저 초기화
     }
+
+    //게임 종료(에디터일 경우 플레이모드 해제, 빌드 후일 경우 게임 종료)
     public void ExitGame()
     {
 #if UNITY_EDITOR
@@ -52,13 +55,13 @@ public class ButtonManager : MonoBehaviour
 #endif
     }
 
-
+    //일시정지 버튼
     public void PauseButtonActive()
     {
         PausePanel.SetActive(true);
         GameManager.Instance.Pause();
     }
-
+    //재개버튼
     public void ResumeButton()
     {
         PausePanel.SetActive(false);

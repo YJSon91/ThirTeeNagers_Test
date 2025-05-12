@@ -175,12 +175,13 @@ public class GameManager : MonoBehaviour
     //TODO:게임오버 조건 만들기 , UI만들고 연결하기(UI매니저로 실시)
     //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
 
-
+    //게임 멈춤
     public void Pause()
     {
         _isPause = true;
     }
 
+    //게임 재개
     public void Resume()
     {
         _isPause = false;
