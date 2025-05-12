@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
     [SerializeField] private Text scoreTxt;     //점수 텍스트
+    [SerializeField] private GameObject GameOverPanel;
 
 
 
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
+    [SerializeField] private bool _isPause = false;
     [SerializeField] private int _score = 0;    //점수 변수
 
     //점수 프로퍼티
@@ -44,7 +46,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -96,6 +97,15 @@ public class GameManager : MonoBehaviour
             GameOver();
             return;
         }
+
+        if(_isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     //스테이지 시작시 초기화
@@ -119,7 +129,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _isGameOver = true;
-        Debug.Log("GameOver");
+        GameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
 
@@ -164,7 +175,17 @@ public class GameManager : MonoBehaviour
     //TODO:게임오버 조건 만들기 , UI만들고 연결하기(UI매니저로 실시)
     //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
 
+    //게임 멈춤
+    public void Pause()
+    {
+        _isPause = true;
+    }
 
+    //게임 재개
+    public void Resume()
+    {
+        _isPause = false;
+    }
 
 
 

@@ -47,6 +47,7 @@ public class Item : MonoBehaviour
 
             case ItemType.SpeedUp:
                 itemInteraction.ChangeMovementSpeed(true); // 속도 증가 효과 (1.5배)
+                itemInteraction.PlayTrailEffect(5f);      //이펙트 출력
                 break;
 
             case ItemType.SpeedDown:
