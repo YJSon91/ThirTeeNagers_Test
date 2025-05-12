@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
 
         //디버그용 스테이지 스타트 
-        if (_isStageClear && Input.GetKeyDown(KeyCode.Space))
+        if (_isStageClear && Input.GetKeyDown(KeyCode.A))
         {
             StageStart();
         }
