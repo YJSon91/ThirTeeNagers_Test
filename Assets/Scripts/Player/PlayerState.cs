@@ -55,12 +55,28 @@ public class PlayerState : MonoBehaviour
 
     [SerializeField] private float hitCooldown = 1; // 플레이가 피격 당할 시 쿨타임 주기
 
+    [SerializeField] private float knockbackForce = 5f;
+
+    public float KnockbackForce
+    {
+        get {  return knockbackForce; }
+        set { knockbackForce = value; }
+    }
+    [SerializeField] private float knockbackDuration = 0.2f;
+
+    public float KnockbackDuration
+    {
+        get { return knockbackDuration; }
+        set { knockbackDuration = value; }
+    }
+
+
     public float HitCooldown
     {
         get { return hitCooldown; }
     }
 
-
+    public bool isKnockback = false;
     public bool isDead = false; // 플레이어가 죽었는지 체크
     public bool isJump = false; // 플레이어가 점프 상태인지 체크
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     //인스펙터에서 가져올 수 있도록 시리얼라이즈필드 설정
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
-    [SerializeField] private Text scoreTxt;     //점수 텍스트
+    [SerializeField] private TextMeshProUGUI scoreTxt;     //점수 텍스트
 
 
 

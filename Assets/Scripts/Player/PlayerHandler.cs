@@ -12,7 +12,7 @@ public class PlayerHandler : PlayerState
     // 아이템 효과에 의한 속도 배율 적용용
     private PlayerItemInteraction itemInteraction;
 
-    void Awake()
+    private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         if (animator == null)
@@ -32,11 +32,11 @@ public class PlayerHandler : PlayerState
             Debug.Log("PlayerItemInteraction 스크립트가 없습니다.");
         }
     }
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            TakeDamage(1);
+            TakeDamage(1, transform.position);
         }
     }
 
@@ -45,6 +45,8 @@ public class PlayerHandler : PlayerState
         if (isDead) return; //플레이어가 죽은 상태면 아무것도 안하고 빠져나간다.
 
         Vector3 velocity = _rigidbody2D.velocity; // RigidBody2D에 있는 velocity를 복사
+
+        if (isKnockback) return; 
         velocity.x = PlayerSpeed;
 
         velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();
@@ -69,7 +71,7 @@ public class PlayerHandler : PlayerState
 
     }
 
-    void OnJump(InputValue inputValue)
+    private void OnJump(InputValue inputValue)
     {
         if (inputValue.isPressed && CurrentJumpCount < MaxJumpCount)
         {
@@ -80,25 +82,42 @@ public class PlayerHandler : PlayerState
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 hitSourcePosition)
     {
 
         CurrentHealth -= damage;  // 현재체력 감소 시킴
         StartCoroutine(HitEffect());
         animator.SetTrigger("IsHit");
+
+        Vector2 knockbackDir = (transform.position - (Vector3)hitSourcePosition).normalized;
+        StartCoroutine(ApplkKnockback(knockbackDir));
+
         if (CurrentHealth <= 0)  // 현재체력이 0이되면 Die메서드 실행
 
         {
             Die();
         }
     }
+    private IEnumerator ApplkKnockback(Vector2 dir)
+    {
+        isKnockback = true;
+        Debug.Log("넉백당함");
+        Debug.Log(KnockbackForce);
+        _rigidbody2D.velocity = dir * KnockbackForce;
 
-    void Die()
+        yield return new WaitForSeconds(KnockbackDuration);
+
+        _rigidbody2D.velocity = Vector2.zero;
+        isKnockback = false;
+        Debug.Log("넉백풀림");
+    }
+
+    private void Die()
     {
         // TODO: 죽었을 때 로직 구현
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
 
         Debug.Log("현재 점프 수 :" + CurrentJumpCount);     ///////////// 테스트용 코드(점프 횟수 확인) 
