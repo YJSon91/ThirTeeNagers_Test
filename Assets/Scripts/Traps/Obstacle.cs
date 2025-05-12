@@ -52,7 +52,7 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.TryGetComponent<PlayerHandler>(out var player))
         {
-            //player.TakeDamage(1,vector2);
+            player.TakeDamage(1,collision.transform.position);
         }
     }
 }

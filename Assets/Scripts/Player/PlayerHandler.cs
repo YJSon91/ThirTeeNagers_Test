@@ -13,6 +13,8 @@ public class PlayerHandler : PlayerState
     // 아이템 효과에 의한 속도 배율 적용용
     private PlayerItemInteraction itemInteraction;
 
+    private bool isInvincible = false;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -89,7 +91,7 @@ public class PlayerHandler : PlayerState
 
     public void TakeDamage(int damage, Vector2 hitSourcePosition)
     {
-
+        if(isInvincible || isDead) return;  
         CurrentHealth -= damage;  // 현재체력 감소 시킴
         StartCoroutine(HitEffect());
         animator.SetTrigger("IsHit");
@@ -97,12 +99,8 @@ public class PlayerHandler : PlayerState
 
         Vector2 knockbackDir = (transform.position - (Vector3)hitSourcePosition).normalized;
         StartCoroutine(ApplkKnockback(knockbackDir));
+        StartCoroutine(StartInvincibility());
 
-        if (CurrentHealth <= 0)  // 현재체력이 0이되면 Die메서드 실행
-
-        {
-            Die();
-        }
     }
     private IEnumerator ApplkKnockback(Vector2 dir)
     {
@@ -118,10 +116,7 @@ public class PlayerHandler : PlayerState
         Debug.Log("넉백풀림");
     }
 
-    private void Die()
-    {
-        // TODO: 죽었을 때 로직 구현
-    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -145,5 +140,14 @@ public class PlayerHandler : PlayerState
         animator.SetTrigger("IsHit");
         yield return new WaitForSeconds(0.05f);
         animator.SetTrigger("IsHit");
+    }
+
+    private IEnumerator StartInvincibility()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(HitCooldown);
+
+        isInvincible = false;
     }
 }
