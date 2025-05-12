@@ -14,11 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
     [SerializeField] private TextMeshProUGUI scoreTxt;     //점수 텍스트
+    [SerializeField] private GameObject GameOverPanel;
 
 
 
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
+    [SerializeField] private bool _isPause = false;         //일시정지 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
 
     //점수 프로퍼티
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _requiredSurvivalTime = 0f;  //실제 버텨야하는 시간
     [SerializeField] private float _increaseDuration = 10f;  //스테이지 거듭할 수록 늘어날 시간 증가값
     [SerializeField] private int _increaseSpeed = 1;   //스테이지 거듭할 수록 스피드 증가값
-
+    [SerializeField] private int PlayerSpeed;
 
 
     //게임 매니저 싱글톤 패턴
@@ -45,7 +47,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -61,16 +62,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        PlayerSpeed = _player.PlayerSpeed;
 
-
-        //디버그용 점수 추가
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            AddScore(1);
-        }
 
         //디버그용 스테이지 스타트 
-        if (_isStageClear && Input.GetKeyDown(KeyCode.Space))
+        if (_isStageClear && Input.GetKeyDown(KeyCode.A))
         {
             StageStart();
         }
@@ -97,6 +93,15 @@ public class GameManager : MonoBehaviour
             GameOver();
             return;
         }
+
+        if(_isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     //스테이지 시작시 초기화
@@ -120,7 +125,9 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _isGameOver = true;
-        Debug.Log("GameOver");
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
+        
     }
 
 
@@ -167,13 +174,13 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-
+        _isPause = true;
     }
 
 
     public void Resume()
     {
-
+        _isPause = false;
 
 
 
