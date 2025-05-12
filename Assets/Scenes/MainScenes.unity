@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 127011278}
   - component: {fileID: 127011280}
   - component: {fileID: 127011279}
+  - component: {fileID: 127011281}
   m_Layer: 5
   m_Name: HPFull1 (2)
   m_TagString: Untagged
@@ -831,6 +832,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127011277}
   m_CullTransparentMesh: 1
+--- !u!95 &127011281
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127011277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2432718f61bf0f648b7133ca65cff74a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &206035772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,6 +2204,7 @@ GameObject:
   - component: {fileID: 643546694}
   - component: {fileID: 643546696}
   - component: {fileID: 643546695}
+  - component: {fileID: 643546697}
   m_Layer: 5
   m_Name: HPFull1 (1)
   m_TagString: Untagged
@@ -2246,6 +2269,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643546693}
   m_CullTransparentMesh: 1
+--- !u!95 &643546697
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643546693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2432718f61bf0f648b7133ca65cff74a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &652881418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,6 +2868,7 @@ MonoBehaviour:
   _requiredSurvivalTime: 30
   _increaseDuration: 10
   _increaseSpeed: 1
+  PlayerSpeed: 0
 --- !u!4 &852120249
 Transform:
   m_ObjectHideFlags: 0
@@ -4269,6 +4314,7 @@ GameObject:
   - component: {fileID: 1239755138}
   - component: {fileID: 1239755140}
   - component: {fileID: 1239755139}
+  - component: {fileID: 1239755141}
   m_Layer: 5
   m_Name: HPFull1
   m_TagString: Untagged
@@ -4333,6 +4379,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239755137}
   m_CullTransparentMesh: 1
+--- !u!95 &1239755141
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239755137}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2432718f61bf0f648b7133ca65cff74a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1248408897
 GameObject:
   m_ObjectHideFlags: 0
@@ -4689,12 +4756,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0819faf4933e0645b3fff81be76ef0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartImaages:
+  heartImages:
   - {fileID: 127011279}
   - {fileID: 643546695}
   - {fileID: 1239755139}
   fullHeart: {fileID: 21300000, guid: 1d2a7cf1c6f34a74fbe784f1fa99df2c, type: 3}
   emptyHeart: {fileID: 21300000, guid: e7a45c5fc44fd4942a9fca60d64aad24, type: 3}
+  animator: {fileID: 1239755141}
 --- !u!1 &1376782788
 GameObject:
   m_ObjectHideFlags: 0
