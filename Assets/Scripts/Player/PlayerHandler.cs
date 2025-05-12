@@ -55,6 +55,7 @@ public class PlayerHandler : PlayerState
         {
             velocity.y += JumpForce; // JumForce 만큼 더해줌
             animator.SetBool("IsJump", true);
+            isJump = false; // 점프 상태를 false로 바꿔줌
         }
 
         if (_rigidbody2D.velocity.y < -0.1f)

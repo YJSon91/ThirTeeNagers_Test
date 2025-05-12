@@ -1236,6 +1236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Itemspawner(put_in_mainscene)
       objectReference: {fileID: 0}
+    - target: {fileID: 7549243407866638162, guid: e9e4f98d972c5bc4e9023bdca3fe66d4, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 935364274}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
