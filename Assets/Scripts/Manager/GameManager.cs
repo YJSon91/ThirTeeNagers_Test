@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }        //싱글톤 인스턴스 변수
 
+    
 
     //인스펙터에서 가져올 수 있도록 시리얼라이즈필드 설정
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
@@ -58,10 +59,10 @@ public class GameManager : MonoBehaviour
 
 
     }
-
+    
     private void Update()
     {
-
+      
 
         //디버그용 점수 추가
         if (Input.GetKeyDown(KeyCode.A))
