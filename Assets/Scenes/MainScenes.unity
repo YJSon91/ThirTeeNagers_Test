@@ -2941,7 +2941,7 @@ MonoBehaviour:
   currenthealth: 3
   maxhealth: 3
   playerSpeed: 3
-  jumpForce: 3
+  jumpForce: 3.5
   cureentJumpCount: 0
   maxJumpCount: 2
   hitCooldown: 1
@@ -2950,7 +2950,7 @@ MonoBehaviour:
   isKnockback: 0
   isDead: 0
   isJump: 0
-  godMod: 1
+  godMod: 0
 --- !u!114 &935364271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3070,8 +3070,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.12718108}
-  m_Size: {x: 0.5, y: 0.76240903}
+  m_Offset: {x: 0, y: -0.11507654}
+  m_Size: {x: 0.5, y: 0.73819995}
   m_Direction: 0
 --- !u!1 &962899390
 GameObject:
@@ -3160,18 +3160,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
-    - target: {fileID: 3171469562721096912, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642904113281292176, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032883997248068783, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 7859825569580547433, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3211,14 +3199,6 @@ PrefabInstance:
     - target: {fileID: 7859825569580547433, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7903747133014922881, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7904100126321944898, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5495,7 +5475,7 @@ Transform:
   m_GameObject: {fileID: 1547136928}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: 0, z: 0}
+  m_LocalPosition: {x: -28, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5515,8 +5495,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleCount: 0
   obstacleLastPosition: {x: 0, y: 0, z: 0}
-  numBgCount: 3
-  numGroundCount: 3
+  numBgCount: 4
+  numGroundCount: 4
 --- !u!61 &1547136931
 BoxCollider2D:
   m_ObjectHideFlags: 0

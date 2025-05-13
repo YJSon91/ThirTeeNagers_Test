@@ -28,6 +28,7 @@ public class Obstacle : MonoBehaviour
         {
             case ObstacleType.Fire:
                 placePosition.y = -1.6f; // 중간 라인 (예시)
+                placePosition.x += 4.0f; // 장애물 간격
                 break;
             case ObstacleType.Saw:
                 placePosition.y = -2.0f; // 아래쪽
@@ -36,7 +37,7 @@ public class Obstacle : MonoBehaviour
                 placePosition.y = -1.75f;
                 break;
             case ObstacleType.SpikeHead:
-                placePosition.y = Random.Range(0f, 4.0f); // 위쪽 랜덤
+                placePosition.y = Random.Range(-1.0f, 4.0f); // 위쪽 랜덤
                 break;
            
         }
