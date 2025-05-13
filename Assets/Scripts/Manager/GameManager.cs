@@ -167,6 +167,8 @@ public class GameManager : MonoBehaviour
 
         //_player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
 
+        StageUnlockManager.UnlockNextStage(_currentStage - 1);
+
 
     }
 
