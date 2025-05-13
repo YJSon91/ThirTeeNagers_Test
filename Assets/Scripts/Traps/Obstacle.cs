@@ -15,19 +15,20 @@ public class Obstacle : MonoBehaviour
 {
     [Header("장애물 타입 설정")]
     public ObstacleType obstacleType;
-
+         
     public float widthPadding = 4.0f; // 장애물 간격
 
     // 장애물 위치 설정
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
     {
-        widthPadding = Random.Range(3.0f, 4.0f);
+        widthPadding = Random.Range(2.0f, 4.0f);
         Vector3 placePosition = lastPosition + new Vector3(widthPadding, 0);
 
         switch (obstacleType)
         {
             case ObstacleType.Fire:
-                placePosition.y = -1.5f; // 중간 라인 (예시)
+                placePosition.y = -1.6f; // 중간 라인 (예시)
+                placePosition.x += 4.0f; // 장애물 간격
                 break;
             case ObstacleType.Saw:
                 placePosition.y = -2.0f; // 아래쪽
@@ -36,7 +37,7 @@ public class Obstacle : MonoBehaviour
                 placePosition.y = -1.75f;
                 break;
             case ObstacleType.SpikeHead:
-                placePosition.y = Random.Range(0.0f, 4.0f); // 위쪽 랜덤
+                placePosition.y = Random.Range(-1.0f, 4.0f); // 위쪽 랜덤
                 break;
            
         }
@@ -49,8 +50,7 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.TryGetComponent<PlayerHandler>(out var player))
         {
-            // hitsourceposition 이 뭔지 받아와서 벡터2자리에 넣어줘야함
-           // player.TakeDamage(1,collision.transform.position); 
+            player.TakeDamage(1,collision.transform.position);
         }
     }
 }

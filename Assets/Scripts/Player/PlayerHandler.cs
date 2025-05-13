@@ -8,9 +8,13 @@ public class PlayerHandler : PlayerState
 {
     Animator animator;
     Rigidbody2D _rigidbody2D;
+    private HealthUI healthUI;
+    [SerializeField]private bool godMod = false;
 
     // 아이템 효과에 의한 속도 배율 적용용
     private PlayerItemInteraction itemInteraction;
+
+    private bool isInvincible = false;
 
     private void Awake()
     {
@@ -31,12 +35,16 @@ public class PlayerHandler : PlayerState
         {
             Debug.Log("PlayerItemInteraction 스크립트가 없습니다.");
         }
+        CurrentHealth = MaxHealth;
+        healthUI = FindObjectOfType<HealthUI>();
+        healthUI.SetMaxHealth(MaxHealth);
+
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            TakeDamage(1, transform.position);
+            TakeDamage(1, transform.position,true);
         }
     }
 
@@ -49,7 +57,7 @@ public class PlayerHandler : PlayerState
         if (isKnockback) return; 
         velocity.x = PlayerSpeed;
 
-        velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();
+        velocity.x = PlayerSpeed * itemInteraction.GetSpeedMultiplier();
 
         animator.SetBool("IsRun", true);
 
@@ -82,21 +90,23 @@ public class PlayerHandler : PlayerState
         }
     }
 
-    public void TakeDamage(int damage, Vector2 hitSourcePosition)
+    public void TakeDamage(int damage, Vector2 hitSourcePosition, bool isDebug = false)
     {
-
+        if(isInvincible || isDead) return;
+        if (godMod && !isDebug)
+        {
+            Debug.Log("[GODMODE] 일반 피격 차단됨");
+            return;
+        }
         CurrentHealth -= damage;  // 현재체력 감소 시킴
         StartCoroutine(HitEffect());
         animator.SetTrigger("IsHit");
+        healthUI.UpdateHealtDisplay(CurrentHealth);
 
         Vector2 knockbackDir = (transform.position - (Vector3)hitSourcePosition).normalized;
         StartCoroutine(ApplkKnockback(knockbackDir));
+        StartCoroutine(StartInvincibility());
 
-        if (CurrentHealth <= 0)  // 현재체력이 0이되면 Die메서드 실행
-
-        {
-            Die();
-        }
     }
     private IEnumerator ApplkKnockback(Vector2 dir)
     {
@@ -112,10 +122,7 @@ public class PlayerHandler : PlayerState
         Debug.Log("넉백풀림");
     }
 
-    private void Die()
-    {
-        // TODO: 죽었을 때 로직 구현
-    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -139,5 +146,14 @@ public class PlayerHandler : PlayerState
         animator.SetTrigger("IsHit");
         yield return new WaitForSeconds(0.05f);
         animator.SetTrigger("IsHit");
+    }
+
+    private IEnumerator StartInvincibility()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(HitCooldown);
+
+        isInvincible = false;
     }
 }

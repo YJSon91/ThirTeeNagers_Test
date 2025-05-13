@@ -13,11 +13,29 @@ public enum ItemType
 public class Item : MonoBehaviour
 {
     [SerializeField] private ItemType itemType; // 인스펙터에서 아이템 타입 선택
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private HealthUI healthUI;
 
     private void Start()
     {
+        healthUI = FindObjectOfType<HealthUI>();
         // 아이템이 생성된 후 5초가 지나면 자동으로 파괴됨 (플레이어가 안 먹었을 경우 대비)
-        Destroy(gameObject, 5f);
+        //Destroy(gameObject, 5f);
+        GameObject playerobj = GameObject.FindWithTag("Player");                    //player 태그 찾기
+        if (playerobj != null)
+        {
+            playerTransform = playerobj.transform;          //플레이어가 null이 아니면 플레이어 위치를 저장
+        }
+    }
+    private void Update()
+    {
+        if (playerTransform == null) return;
+
+        float distance = transform.position.x - playerTransform.position.x;
+        if(distance < -10f )
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,10 +62,12 @@ public class Item : MonoBehaviour
 
             case ItemType.Heal:
                 playerState.CurrentHealth += 1; // 체력 +1 증가 (최대치 제한은 PlayerState에서 처리)
+                healthUI.UpdateHealtDisplay(playerState.CurrentHealth);
                 break;
 
             case ItemType.SpeedUp:
                 itemInteraction.ChangeMovementSpeed(true); // 속도 증가 효과 (1.5배)
+                itemInteraction.PlayTrailEffect(5);
                 break;
 
             case ItemType.SpeedDown:

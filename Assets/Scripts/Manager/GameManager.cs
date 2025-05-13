@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
     [SerializeField] private TextMeshProUGUI scoreTxt;     //점수 텍스트
+    [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private TextMeshProUGUI bestScoreTxt;
 
 
 
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
+    [SerializeField] private bool _isPause = false;         //일시정지 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
+    private int bestScore;
 
     //점수 프로퍼티
     public int score
@@ -36,7 +40,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _requiredSurvivalTime = 0f;  //실제 버텨야하는 시간
     [SerializeField] private float _increaseDuration = 10f;  //스테이지 거듭할 수록 늘어날 시간 증가값
     [SerializeField] private int _increaseSpeed = 1;   //스테이지 거듭할 수록 스피드 증가값
+    [SerializeField] private int PlayerSpeed;
 
+    private const string BestScoreKey = "BestScore";
 
 
     //게임 매니저 싱글톤 패턴
@@ -45,32 +51,41 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+
+        bestScore = PlayerPrefs.GetInt(BestScoreKey,0);
+        bestScoreTxt.text = bestScore.ToString();
+
+
         //시작할때 슬라이더 밸류값 설정
         survivalTimeSlider.minValue = 0;
         survivalTimeSlider.maxValue = _requiredSurvivalTime;
         survivalTimeSlider.value = _requiredSurvivalTime;
 
-
+    }
+    private void Start()
+    {
+        if(StageDataHolder.Instance.selectedStage != null)
+        {
+            StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);
+        }
+        else
+        {
+            Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
+        }
     }
 
     private void Update()
     {
-
-
-        //디버그용 점수 추가
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            AddScore(1);
-        }
+        PlayerSpeed = _player.PlayerSpeed;
+        UpdateHighScore(score);
 
         //디버그용 스테이지 스타트 
-        if (_isStageClear && Input.GetKeyDown(KeyCode.Space))
+        if (_isStageClear && Input.GetKeyDown(KeyCode.A))
         {
             StageStart();
         }
@@ -87,6 +102,7 @@ public class GameManager : MonoBehaviour
         //버텨야 하는 시간이 0이 되면 클리어
         if (_requiredSurvivalTime <= 0)
         {
+            UpdateHighScore(score);
             StageClear();
             return;
         }
@@ -94,15 +110,25 @@ public class GameManager : MonoBehaviour
         //게임오버 로직
         if (_player.CurrentHealth <= 0)
         {
+            UpdateHighScore(score);
             GameOver();
             return;
+        }
+
+        if(_isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 
     //스테이지 시작시 초기화
     private void StageStart()
     {
-        _requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //스테이지마다 버텨야하는 시간값을 갱신
+        //_requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //스테이지마다 버텨야하는 시간값을 갱신
 
         //시작할때 슬라이더 밸류값 설정
         survivalTimeSlider.minValue = 0;
@@ -114,13 +140,20 @@ public class GameManager : MonoBehaviour
         _isGameOver = false;
     }
 
+    public void SetSurvivalTime(float survivalTime)
+    {
+        _requiredSurvivalTime = survivalTime;
+    }
+
 
     //게임오버 메드
     //TODO:게임오버 씬 혹은 UI를 만들고 켜주기
     public void GameOver()
     {
         _isGameOver = true;
-        Debug.Log("GameOver");
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
+        
     }
 
 
@@ -132,7 +165,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("StageClear");
         _currentStage += 1;             //스테이지 ++
 
-        _player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
+        //_player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
+
+        StageUnlockManager.UnlockNextStage(_currentStage - 1);
 
 
     }
@@ -158,7 +193,7 @@ public class GameManager : MonoBehaviour
 
     public float GetCurrentGameSpeed()
     {
-        return 3f; // 현재는 임시값, 추후 게임 진행에 따라 증가하도록 변경 가능
+        return _player.PlayerSpeed; // 현재는 임시값, 추후 게임 진행에 따라 증가하도록 변경 가능
     }
 
     //TODO: UI만들고 연결하기(UI매니저로 실시)
@@ -167,15 +202,26 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-
+        _isPause = true;
     }
 
 
     public void Resume()
     {
-
+        _isPause = false;
 
 
 
     }
+
+    public void UpdateHighScore(int score)
+    {
+        if(bestScore < score)
+        {
+            bestScore = score;
+            PlayerPrefs.SetInt(BestScoreKey, bestScore);
+        }
+        bestScoreTxt.text = bestScore.ToString();
+    }
+
 }

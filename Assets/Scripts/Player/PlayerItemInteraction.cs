@@ -61,6 +61,8 @@ public class PlayerItemInteraction : MonoBehaviour
         activeParticle = Instantiate(activePaticlePrefab,spawnPos, Quaternion.identity,transform);          //파티클 생성(transform을 부모로 지정해서 캐릭터를 따라다니게 만듦)
 
         StartCoroutine(RemoveTrailAfterSeconds(duration));              //파티클이 생긴 이후 지정된 시간 이후에 제거하는 코루틴 실행
+
+        Debug.Log("호출됨");
     }
 
     //이펙트 출력 후 중단 및 초기화 메서드
@@ -81,5 +83,9 @@ public class PlayerItemInteraction : MonoBehaviour
             Destroy(activeParticle);                //파티클 오브젝트를 완전히 제거
             activeParticle = null;                  //다시 실행하게 초기화
         }
+    }
+    public float GetSpeedMultiplier()
+    {
+        return currentSpeedMultiplier;
     }
 }

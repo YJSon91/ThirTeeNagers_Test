@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9037576972401137764}
   - component: {fileID: 6304566526309393418}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacles
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,6 +155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -216,6 +220,10 @@ PrefabInstance:
     - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
       propertyPath: m_Name
       value: Saw (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -279,6 +287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -300,6 +312,10 @@ PrefabInstance:
     - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_Name
       value: SpikeHead (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,6 +441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -486,6 +506,10 @@ PrefabInstance:
     - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_Name
       value: SpikeHead (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -673,6 +697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeHead
       objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -739,6 +767,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeHead (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -800,6 +832,10 @@ PrefabInstance:
     - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_Name
       value: Spike (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,6 +899,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -924,6 +964,10 @@ PrefabInstance:
     - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_Name
       value: Spike (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1027,6 +1071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1048,6 +1096,10 @@ PrefabInstance:
     - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_Name
       value: Spike (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1151,6 +1203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1172,6 +1228,10 @@ PrefabInstance:
     - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_Name
       value: Spike (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1235,6 +1295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeHead (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -1297,6 +1361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike
       objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -1358,6 +1426,10 @@ PrefabInstance:
     - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_Name
       value: Spike (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139581305553915751, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5455378348271432914, guid: 173db6ba55342d54fb8ef8a994305ce5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1483,6 +1555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeHead (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -1585,6 +1661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw
       objectReference: {fileID: 0}
+    - target: {fileID: 8473331938625187017, guid: 7941d0a267f8ec8448831717c70820c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1668,6 +1748,10 @@ PrefabInstance:
     - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_Name
       value: SpikeHead (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 628213665117550895, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5532298233012617900, guid: 29442c1c5f8424141a362532a3ddf194, type: 3}
       propertyPath: m_LocalPosition.x
