@@ -3156,9 +3156,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 566422229599529666, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: BackGround
+      objectReference: {fileID: 0}
     - target: {fileID: 1372115713226725831, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_Name
       value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411468995382511421, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: BackGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869794317052143774, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: BackGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863379312286612456, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: BackGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705150318438921964, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: BackGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126413028197608324, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: BackGround
       objectReference: {fileID: 0}
     - target: {fileID: 7859825569580547433, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_LocalPosition.x

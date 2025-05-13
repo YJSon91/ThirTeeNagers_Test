@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca8f9bf9ee56414187902762e90a401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleType: 1
+  obstacleType: 0
   highPosY: 1
   lowPosY: -1
   widthPadding: 4

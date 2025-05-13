@@ -35,6 +35,16 @@ public class Bglooper : MonoBehaviour
 
         if (collision.CompareTag("Ground"))
         {
+            Debug.Log("Ground Check.");
+            float widthOfBgObject = ((BoxCollider2D)collision).size.x;
+            Vector3 pos = collision.transform.position;
+
+            pos.x += widthOfBgObject * numBgCount;
+            collision.transform.position = pos;
+            return;
+        }
+        else if (collision.CompareTag("BackGround"))
+        {
             Debug.Log("Bg Check.");
             float widthOfBgObject = ((BoxCollider2D)collision).size.x;
             Vector3 pos = collision.transform.position;
