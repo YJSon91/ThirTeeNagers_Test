@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class Bglooper : MonoBehaviour
 {
@@ -16,21 +17,26 @@ public class Bglooper : MonoBehaviour
 
     void Start()
     {
-        // 씬에 존재하는 모든 Obstacle 객체를 배열로 가져오기
-        Obstacle[] obstacles = GameObject.FindObjectsOfType<Obstacle>();
-        // 첫 번째 장애물의 위치를 obstacleLastPosition에 저장
-        obstacleLastPosition = obstacles[0].transform.position;
-        // 장애물의 개수를 계산하여 저장
-        obstacleCount = obstacles.Length;
+        List<Obstacle> obstacleList = GameObject.FindObjectsOfType<Obstacle>().ToList();
+        obstacleCount = obstacleList.Count;
 
-        // 장애물 개수만큼 반복하여 각 장애물의 위치를 랜덤하게 설정
+        // 시작 위치는 첫 번째 오브젝트 기준
+        obstacleLastPosition = obstacleList[0].transform.position;
+
         for (int i = 0; i < obstacleCount; i++)
         {
-            // SetRandomPlace 함수는 각 장애물의 위치를 이전 장애물 위치를 기반으로 설정함
-            obstacleLastPosition = obstacles[i].SetRandomPlace(obstacleLastPosition, obstacleCount);
-            Debug.Log("오브젝트 갯수:" + obstacleCount);
+            // 남은 오브젝트 중 랜덤하게 하나 선택
+            int randIndex = Random.Range(0, obstacleList.Count);
+            Obstacle selected = obstacleList[randIndex];
+
+            // 배치
+            obstacleLastPosition = selected.SetRandomPlace(obstacleLastPosition, obstacleCount);
+
+            // 선택한 오브젝트는 리스트에서 제거
+            obstacleList.RemoveAt(randIndex);
         }
     }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
