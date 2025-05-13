@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     //스테이지 시작시 초기화
     private void StageStart()
     {
-        _requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //스테이지마다 버텨야하는 시간값을 갱신
+        //_requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //스테이지마다 버텨야하는 시간값을 갱신
 
         //시작할때 슬라이더 밸류값 설정
         survivalTimeSlider.minValue = 0;
@@ -128,6 +128,11 @@ public class GameManager : MonoBehaviour
         //불값 초기화
         _isStageClear = false;
         _isGameOver = false;
+    }
+
+    public void SetSurvivalTime(float survivalTime)
+    {
+        _requiredSurvivalTime = survivalTime;
     }
 
 
@@ -150,7 +155,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("StageClear");
         _currentStage += 1;             //스테이지 ++
 
-        _player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
+        //_player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
 
 
     }
