@@ -63,6 +63,7 @@ public class PlayerHandler : PlayerState
 
         if (isJump) // 플레이어가 점프 상태라면
         {
+            SoundManager.instance.PlayJump();
             velocity.y += JumpForce; // JumForce 만큼 더해줌
             animator.SetBool("IsJump", true);
             isJump = false; // 점프 상태를 false로 바꿔줌
@@ -106,6 +107,7 @@ public class PlayerHandler : PlayerState
         Vector2 knockbackDir = (transform.position - (Vector3)hitSourcePosition).normalized;
         StartCoroutine(ApplkKnockback(knockbackDir));
         StartCoroutine(StartInvincibility());
+        SoundManager.instance.PlayHit();
 
     }
     private IEnumerator ApplkKnockback(Vector2 dir)

@@ -58,20 +58,24 @@ public class Item : MonoBehaviour
             case ItemType.Score:
                 GameManager.Instance.AddScore(1); // 점수 +1 증가 (GameManager의 AddScore 함수 호출)
                 Debug.Log("오렌지에 닿았음");
+                SoundManager.instance.PlayScore();
                 break;
 
             case ItemType.Heal:
                 playerState.CurrentHealth += 1; // 체력 +1 증가 (최대치 제한은 PlayerState에서 처리)
                 healthUI.UpdateHealtDisplay(playerState.CurrentHealth);
+                SoundManager.instance.PlayItemPickUp();
                 break;
 
             case ItemType.SpeedUp:
                 itemInteraction.ChangeMovementSpeed(true); // 속도 증가 효과 (1.5배)
                 itemInteraction.PlayTrailEffect(5);
+                SoundManager.instance.PlayItemPickUp();
                 break;
 
             case ItemType.SpeedDown:
                 itemInteraction.ChangeMovementSpeed(false); // 속도 감소 효과 (0.5배)
+                SoundManager.instance.PlayItemPickUp();
                 break;
         }
 

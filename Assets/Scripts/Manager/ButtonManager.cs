@@ -16,6 +16,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private Button PauseButton;
     [SerializeField] private Button SettingButton;
     [SerializeField] private Button CloseButton;
+    [SerializeField] private Button TitleButton;
 
     //패널 오브젝트(인스펙터에서 할당)
     [Header("패널")]
@@ -66,6 +67,11 @@ public class ButtonManager : MonoBehaviour
     {
         PausePanel.SetActive(false);
         GameManager.Instance.Resume();
+    }
+
+    public void GoTitleScreen()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 
 }
