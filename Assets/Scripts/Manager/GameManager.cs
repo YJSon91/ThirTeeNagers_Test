@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
 
     public float GetCurrentGameSpeed()
     {
-        return 3f; // 현재는 임시값, 추후 게임 진행에 따라 증가하도록 변경 가능
+        return _player.PlayerSpeed; // 현재는 임시값, 추후 게임 진행에 따라 증가하도록 변경 가능
     }
 
     //TODO: UI만들고 연결하기(UI매니저로 실시)
