@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 8556296645501664454}
   m_Layer: 0
   m_Name: WOODS - First (1)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 1578045477842919008}
   m_Layer: 0
   m_Name: BUSH - BACKGROUND (1)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1460,7 +1460,7 @@ GameObject:
   - component: {fileID: 83357663299620524}
   m_Layer: 0
   m_Name: BUSH - BACKGROUND (2)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3124,7 +3124,7 @@ GameObject:
   - component: {fileID: 2351621159547714611}
   m_Layer: 0
   m_Name: BUSH - BACKGROUND (1)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3601,7 +3601,7 @@ GameObject:
   - component: {fileID: 7196222917271213138}
   m_Layer: 0
   m_Name: WOODS - First (2)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 4702006474680366550}
   m_Layer: 0
   m_Name: BUSH - BACKGROUND (2)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5000,7 +5000,7 @@ GameObject:
   - component: {fileID: 7595939171321386284}
   m_Layer: 0
   m_Name: WOODS - First (2)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6058,7 +6058,7 @@ GameObject:
   - component: {fileID: 4677008984761074109}
   m_Layer: 0
   m_Name: WOODS - First (1)
-  m_TagString: Ground
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
