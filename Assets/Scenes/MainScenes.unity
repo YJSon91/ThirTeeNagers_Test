@@ -2797,6 +2797,7 @@ MonoBehaviour:
   survivalTimeSlider: {fileID: 329847112}
   scoreTxt: {fileID: 27190966}
   GameOverPanel: {fileID: 2124344459}
+  bestScoreTxt: {fileID: 277684632}
   _isGameOver: 0
   _isStageClear: 0
   _isPause: 0

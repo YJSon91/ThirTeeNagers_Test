@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
     [SerializeField] private TextMeshProUGUI scoreTxt;     //점수 텍스트
     [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private TextMeshProUGUI bestScoreTxt;
 
 
 
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isStageClear = false;   //스테이지 클리어 확인 불리언
     [SerializeField] private bool _isPause = false;         //일시정지 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
+    private int bestScore;
 
     //점수 프로퍼티
     public int score
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _increaseSpeed = 1;   //스테이지 거듭할 수록 스피드 증가값
     [SerializeField] private int PlayerSpeed;
 
+    private const string BestScoreKey = "BestScore";
+
 
     //게임 매니저 싱글톤 패턴
     private void Awake()
@@ -52,6 +56,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        bestScore = PlayerPrefs.GetInt(BestScoreKey,0);
+        bestScoreTxt.text = bestScore.ToString();
+
+
         //시작할때 슬라이더 밸류값 설정
         survivalTimeSlider.minValue = 0;
         survivalTimeSlider.maxValue = _requiredSurvivalTime;
@@ -63,7 +72,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         PlayerSpeed = _player.PlayerSpeed;
-
+        UpdateHighScore(score);
 
         //디버그용 스테이지 스타트 
         if (_isStageClear && Input.GetKeyDown(KeyCode.A))
@@ -83,6 +92,7 @@ public class GameManager : MonoBehaviour
         //버텨야 하는 시간이 0이 되면 클리어
         if (_requiredSurvivalTime <= 0)
         {
+            UpdateHighScore(score);
             StageClear();
             return;
         }
@@ -90,6 +100,7 @@ public class GameManager : MonoBehaviour
         //게임오버 로직
         if (_player.CurrentHealth <= 0)
         {
+            UpdateHighScore(score);
             GameOver();
             return;
         }
@@ -185,4 +196,15 @@ public class GameManager : MonoBehaviour
 
 
     }
+
+    public void UpdateHighScore(int score)
+    {
+        if(bestScore < score)
+        {
+            bestScore = score;
+            PlayerPrefs.SetInt(BestScoreKey, bestScore);
+        }
+        bestScoreTxt.text = bestScore.ToString();
+    }
+
 }
