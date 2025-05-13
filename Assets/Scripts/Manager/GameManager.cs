@@ -71,11 +71,11 @@ public class GameManager : MonoBehaviour
 
     }
     private void Start()
-    {
+    {   //스테이지 선택 메뉴에서 할당받았는지 여부 확인
         if(StageDataHolder.Instance.selectedStage != null)
         {
-            StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);
-        }
+            StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);            //선택된 스테이지의 값을 로드함
+        }   
         else
         {
             Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        PlayerSpeed = _player.PlayerSpeed;
+        //PlayerSpeed = _player.PlayerSpeed;
         UpdateHighScore(score);
 
         //디버그용 스테이지 스타트 
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             GameOver();
             return;
         }
-
+        //일시정지 불값에 따라 시간을 멈추고 흐르게 함
         if(_isPause)
         {
             Time.timeScale = 0f;
@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
         _isGameOver = false;
     }
 
+    //스테이지 데이터 값을 받아오기 위한 메서드
     public void SetSurvivalTime(float survivalTime)
     {
         _requiredSurvivalTime = survivalTime;
@@ -232,6 +233,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //최고점수와 현재 점수를 비교하고 최고점수를 갱신함
     public void UpdateHighScore(int score)
     {
         if(bestScore < score)
@@ -241,6 +243,8 @@ public class GameManager : MonoBehaviour
         }
         bestScoreTxt.text = bestScore.ToString();
     }
+
+    //스테이지 클리어 패널을 닫아주는 함수
     public void CloseStageClearPanel()
     {
         StageClearPanel.SetActive(false);
