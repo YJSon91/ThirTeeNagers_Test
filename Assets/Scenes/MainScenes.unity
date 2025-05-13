@@ -2952,7 +2952,7 @@ MonoBehaviour:
   isKnockback: 0
   isDead: 0
   isJump: 0
-  godMod: 0
+  godMod: 1
 --- !u!114 &935364271
 MonoBehaviour:
   m_ObjectHideFlags: 0
