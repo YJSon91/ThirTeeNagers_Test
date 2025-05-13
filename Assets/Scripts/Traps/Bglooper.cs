@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 
 public class Bglooper : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Bglooper : MonoBehaviour
     public int obstacleCount = 0; // 장애물의 개수
     public Vector3 obstacleLastPosition = Vector3.zero; // 마지막으로 배치된 장애물의 위치
     public int numBgCount = 10;
+    public int numGroundCount = 10;
+
 
     void Start()
     {
@@ -38,8 +41,8 @@ public class Bglooper : MonoBehaviour
             Debug.Log("Ground Check.");
             float widthOfBgObject = ((BoxCollider2D)collision).size.x;
             Vector3 pos = collision.transform.position;
-
-            pos.x += widthOfBgObject * numBgCount;
+            
+            pos.x += widthOfBgObject * numGroundCount;
             collision.transform.position = pos;
             return;
         }

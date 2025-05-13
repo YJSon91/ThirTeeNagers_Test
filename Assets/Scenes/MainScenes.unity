@@ -3156,33 +3156,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 566422229599529666, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: BackGround
-      objectReference: {fileID: 0}
     - target: {fileID: 1372115713226725831, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
-    - target: {fileID: 1411468995382511421, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: BackGround
+    - target: {fileID: 3171469562721096912, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1869794317052143774, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+    - target: {fileID: 4642904113281292176, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_TagString
-      value: BackGround
+      value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 2863379312286612456, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+    - target: {fileID: 6032883997248068783, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_TagString
-      value: BackGround
-      objectReference: {fileID: 0}
-    - target: {fileID: 3705150318438921964, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: BackGround
-      objectReference: {fileID: 0}
-    - target: {fileID: 4126413028197608324, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-      propertyPath: m_TagString
-      value: BackGround
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7859825569580547433, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3223,6 +3211,14 @@ PrefabInstance:
     - target: {fileID: 7859825569580547433, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903747133014922881, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904100126321944898, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5520,6 +5516,7 @@ MonoBehaviour:
   obstacleCount: 0
   obstacleLastPosition: {x: 0, y: 0, z: 0}
   numBgCount: 3
+  numGroundCount: 3
 --- !u!61 &1547136931
 BoxCollider2D:
   m_ObjectHideFlags: 0
