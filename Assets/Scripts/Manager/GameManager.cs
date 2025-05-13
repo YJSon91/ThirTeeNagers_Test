@@ -153,6 +153,7 @@ public class GameManager : MonoBehaviour
         _isGameOver = true;
         Time.timeScale = 0f;
         GameOverPanel.SetActive(true);
+        SoundManager.instance.PlayDeath();
         
     }
 
