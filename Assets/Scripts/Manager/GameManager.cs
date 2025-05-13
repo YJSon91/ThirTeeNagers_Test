@@ -66,7 +66,17 @@ public class GameManager : MonoBehaviour
         survivalTimeSlider.maxValue = _requiredSurvivalTime;
         survivalTimeSlider.value = _requiredSurvivalTime;
 
-
+    }
+    private void Start()
+    {
+        if(StageDataHolder.Instance.selectedStage != null)
+        {
+            StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);
+        }
+        else
+        {
+            Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
+        }
     }
 
     private void Update()

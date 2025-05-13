@@ -57,7 +57,7 @@ public class PlayerHandler : PlayerState
         if (isKnockback) return; 
         velocity.x = PlayerSpeed;
 
-        velocity.x = GetComponent<PlayerItemInteraction>().GetCurrentSpeed();
+        velocity.x = PlayerSpeed * itemInteraction.GetSpeedMultiplier();
 
         animator.SetBool("IsRun", true);
 

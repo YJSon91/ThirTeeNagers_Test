@@ -84,4 +84,8 @@ public class PlayerItemInteraction : MonoBehaviour
             activeParticle = null;                  //다시 실행하게 초기화
         }
     }
+    public float GetSpeedMultiplier()
+    {
+        return currentSpeedMultiplier;
+    }
 }
