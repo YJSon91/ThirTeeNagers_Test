@@ -15,6 +15,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip DeathClip;
     public AudioClip HitClip;
 
+
+
+    private float lastScoreSoundTime = 0f;
+    private float minInterval = 0.05f;
+
     private void Awake()
     {
         if(instance == null) instance = this;
@@ -37,7 +42,12 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayScore()
     {
-        PlayClip(scoreClip);
+        if(Time.time - lastScoreSoundTime > minInterval)
+        {
+            PlayClip(scoreClip);
+            lastScoreSoundTime = Time.time;
+        }
+
     }
 
     public void PlayDeath()

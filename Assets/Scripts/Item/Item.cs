@@ -58,6 +58,7 @@ public class Item : MonoBehaviour
             case ItemType.Score:
                 GameManager.Instance.AddScore(1); // 점수 +1 증가 (GameManager의 AddScore 함수 호출)
                 Debug.Log("오렌지에 닿았음");
+                SoundManager.instance.PlayScore();
                 break;
 
             case ItemType.Heal:

@@ -1228,7 +1228,7 @@ MonoBehaviour:
   audioSource: {fileID: 244297895}
   jumpClip: {fileID: 8300000, guid: 7603ba8be5ad9e9448635017e56dfb6d, type: 3}
   ItemPickupClip: {fileID: 8300000, guid: 798af53671dbcde45b297c9eb7234e6c, type: 3}
-  scoreClip: {fileID: 0}
+  scoreClip: {fileID: 8300000, guid: 98ee6b0c425b6e84ca5edad64c15f3dd, type: 3}
   DeathClip: {fileID: 8300000, guid: 352c91deeef5dcf419fceb808d34bcdb, type: 3}
   HitClip: {fileID: 8300000, guid: e68f083f908226c48b16297ea0c19d45, type: 3}
 --- !u!1 &275473496
