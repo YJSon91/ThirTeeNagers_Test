@@ -15,10 +15,7 @@ public class Obstacle : MonoBehaviour
 {
     [Header("장애물 타입 설정")]
     public ObstacleType obstacleType;
-
-    public float highPosY = 3f;
-    public float lowPosY = -1f;
-        
+         
     public float widthPadding = 4.0f; // 장애물 간격
 
     // 장애물 위치 설정
@@ -30,16 +27,17 @@ public class Obstacle : MonoBehaviour
         switch (obstacleType)
         {
             case ObstacleType.Fire:
-                placePosition.y = -0.9f; // 중간 라인 (예시)
+                placePosition.y = -1.6f; // 중간 라인 (예시)
+                placePosition.x += 4.0f; // 장애물 간격
                 break;
             case ObstacleType.Saw:
-                placePosition.y = -1.5f; // 아래쪽
+                placePosition.y = -2.0f; // 아래쪽
                 break;
             case ObstacleType.Spike:
-                placePosition.y = -1.15f;
+                placePosition.y = -1.75f;
                 break;
             case ObstacleType.SpikeHead:
-                placePosition.y = Random.Range(1.0f, highPosY); // 위쪽 랜덤
+                placePosition.y = Random.Range(-1.0f, 4.0f); // 위쪽 랜덤
                 break;
            
         }

@@ -7,7 +7,7 @@ TagManager:
   - Item
   - Obstacle
   - Ground
-  - StageBtn
+  - BackGround
   layers:
   - Default
   - TransparentFX
