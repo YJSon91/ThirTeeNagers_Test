@@ -10,7 +10,8 @@ public class Scene : MonoBehaviour
     {
 
         int j = GameManager.Instance.currentStage;
-
+        Debug.Log(j);
+;
     GameObject InfinityStageBtn = GameObject.Find("InfinityStageBtn"); InfinityStageBtn.SetActive(false); //인피니티 오브젝트 가져오고 숨기기
         int i = 1;
         while (true)//~참인동안

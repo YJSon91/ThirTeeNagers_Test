@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         set { _score = value; }
     }
 
-    [SerializeField] public int _currentStage = 1;        //스테이지 번호
+    [SerializeField] public int _currentStage = 3;        //스테이지 번호
     //스테이지 번호 프로퍼티
     public int currentStage { get { return _currentStage; } }
 
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
     {
         _isStageClear = false;
         _isGameOver = false;
-        _currentStage = 1;
+        _currentStage = 3;
         _requiredSurvivalTime = 0f;
         _score = 0;
         _player.PlayerSpeed = 3;
