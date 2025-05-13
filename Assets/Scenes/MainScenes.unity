@@ -4388,7 +4388,7 @@ MonoBehaviour:
   PauseButton: {fileID: 1513715558}
   SettingButton: {fileID: 497684032}
   CloseButton: {fileID: 2002125580}
-  TitleButton: {fileID: 0}
+  TitleButton: {fileID: 627849476}
   PausePanel: {fileID: 1538315315}
   SettingPanel: {fileID: 443427359}
   GameOverPanel: {fileID: 2124344459}
@@ -4583,7 +4583,7 @@ GameObject:
   - component: {fileID: 1130654141}
   - component: {fileID: 1130654140}
   m_Layer: 5
-  m_Name: PauseTitle
+  m_Name: StageClearTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

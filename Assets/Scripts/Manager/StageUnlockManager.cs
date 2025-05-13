@@ -29,4 +29,11 @@ public class StageUnlockManager : MonoBehaviour
             PlayerPrefs.SetInt("UnlockedStage", justClearedStageIndex + 2);
         }
     }
+
+    public void ResetStageUnlock()
+    {
+        PlayerPrefs.DeleteKey("UnlockedStage");
+        PlayerPrefs.Save();
+        Debug.Log("스테이지 잠금 정보가 초기화 되었습니다.");
+    }
 }
