@@ -10,9 +10,10 @@ public class TitleSceneBtns : MonoBehaviour
     {
         SceneManager.LoadScene("StageScene");
     }
+
     public void GameExit()
     {
-        Debug.Log("dasd");
+        
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else
