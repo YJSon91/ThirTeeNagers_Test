@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreTxt;     //점수 텍스트
     [SerializeField] private GameObject GameOverPanel;
     [SerializeField] private TextMeshProUGUI bestScoreTxt;
+    [SerializeField] private TextMeshProUGUI clearBestScoreTxt;
+    [SerializeField] private TextMeshProUGUI clearScoreTxt;
+    [SerializeField] private GameObject StageClearPanel;
 
 
 
@@ -126,8 +129,15 @@ public class GameManager : MonoBehaviour
     }
 
     //스테이지 시작시 초기화
-    private void StageStart()
+    public void StageStart()
     {
+
+        // 시간이 0이면 잘못된 초기화로 보고, 최소 생존 시간을 지정
+        if (_requiredSurvivalTime <= 0f)
+        {
+            Debug.LogWarning("StageStart called with _requiredSurvivalTime <= 0. Forcing default value.");
+            _requiredSurvivalTime = 10f; // 또는 _baseSurvivalTime 등 적절한 기본값
+        }
         //_requiredSurvivalTime = _baseSurvivalTime + (_increaseDuration * (_currentStage - 1));      //스테이지마다 버텨야하는 시간값을 갱신
 
         //시작할때 슬라이더 밸류값 설정
@@ -162,6 +172,10 @@ public class GameManager : MonoBehaviour
     //TODO:스테이지 클리어 UI를 만들고(다음 스테이지로 갈지 스타트씬?으로 갈지 결정) 켜주기
     public void StageClear()
     {
+        StageClearPanel.SetActive(true);
+        UpdateHighScore(score);
+        clearBestScoreTxt.text = bestScore.ToString();
+        clearScoreTxt.text = score.ToString();
         _isStageClear = true;
         Debug.Log("StageClear");
         _currentStage += 1;             //스테이지 ++
@@ -169,6 +183,8 @@ public class GameManager : MonoBehaviour
         //_player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
 
         StageUnlockManager.UnlockNextStage(_currentStage - 1);
+
+        Time.timeScale = 0f;
 
 
     }
@@ -190,6 +206,7 @@ public class GameManager : MonoBehaviour
         _requiredSurvivalTime = 0f;
         _score = 0;
         _player.PlayerSpeed = 3;
+
     }
 
     public float GetCurrentGameSpeed()
@@ -224,5 +241,9 @@ public class GameManager : MonoBehaviour
         }
         bestScoreTxt.text = bestScore.ToString();
     }
-
+    public void CloseStageClearPanel()
+    {
+        StageClearPanel.SetActive(false);
+        _isStageClear = false;
+    }
 }
