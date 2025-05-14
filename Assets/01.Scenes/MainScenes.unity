@@ -4266,7 +4266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Speed Up (5Seconds)
+  m_text: Speed Up (5 Seconds)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c1831e59e9254ce792bd93fd8b8d144, type: 2}
   m_sharedMaterial: {fileID: 1137836659720376877, guid: 3c1831e59e9254ce792bd93fd8b8d144, type: 2}
@@ -4512,7 +4512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Speed Down (5Seconds)
+  m_text: Speed Down (5 Seconds)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c1831e59e9254ce792bd93fd8b8d144, type: 2}
   m_sharedMaterial: {fileID: 1137836659720376877, guid: 3c1831e59e9254ce792bd93fd8b8d144, type: 2}
@@ -4575,7 +4575,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -69.991455, w: 0}
+  m_margin: {x: 0, y: 0, z: -47.79126, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
