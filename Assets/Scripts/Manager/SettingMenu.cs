@@ -8,7 +8,7 @@ public class SettingMenu : MonoBehaviour
     public static SettingMenu Instance { get; private set; }            //세팅 메뉴 인스턴스화
     [SerializeField] private GameObject pausePanel;                     //일시정지 메뉴 패널
     [SerializeField] private GameObject settingPanel;                   //세팅 메뉴 패널
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource sfxaudioSource;                   //
     [SerializeField] private AudioSource bgmaudioSource;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Toggle bgmMuteToggle;
@@ -53,8 +53,8 @@ public class SettingMenu : MonoBehaviour
         bgmMuteToggle.isOn = !isBgmMute;
         sfxMuteToggle.isOn = !isSfxMute;
 
-        audioSource.volume = savedVolume;
-        audioSource.mute = isSfxMute;
+        sfxaudioSource.volume = savedVolume;
+        sfxaudioSource.mute = isSfxMute;
         bgmaudioSource.mute = isBgmMute;
 
         volumeSlider.onValueChanged.AddListener(SetVolume);
@@ -64,7 +64,7 @@ public class SettingMenu : MonoBehaviour
 
     public void SetVolume(float value)
     {
-        audioSource.volume = value;
+        sfxaudioSource.volume = value;
         PlayerPrefs.SetFloat("Volume", value);
         PlayerPrefs.Save();
     }
@@ -78,7 +78,7 @@ public class SettingMenu : MonoBehaviour
     private void OnsfxMuteToggleChanged(bool isOn)
     {
         bool ismute = !isOn;
-        audioSource.mute = ismute;
+        sfxaudioSource.mute = ismute;
         PlayerPrefs.SetInt("sfxmute", ismute ? 1 : 0);
         PlayerPrefs.Save();
     }

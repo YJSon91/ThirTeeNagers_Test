@@ -4402,7 +4402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1538315315}
   settingPanel: {fileID: 443427359}
-  audioSource: {fileID: 244297895}
+  sfxaudioSource: {fileID: 244297895}
   bgmaudioSource: {fileID: 1944710116}
   volumeSlider: {fileID: 652881420}
   bgmMuteToggle: {fileID: 1036510624}
