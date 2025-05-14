@@ -41,7 +41,7 @@ public class StageUnlockManager : MonoBehaviour
     public void UnlockAllStages()
     {
         int maxStage = stageButtons.Length;
-        PlayerPrefs.SetInt("UnlockStage", maxStage);
+        PlayerPrefs.SetInt("UnlockedStage", maxStage);
         PlayerPrefs.Save();
         Debug.Log("[StageUnlockManager] 모든 스테이지 언락 완료");
         for (int i= 0;  i < stageButtons.Length; i++)
