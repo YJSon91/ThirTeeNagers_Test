@@ -74,4 +74,42 @@ public class Bglooper : MonoBehaviour
 
         }
     }
+    //스테이지 로드시 장애물 재배치하는 함수
+    public void ResetObstacles()
+    {
+        List<Obstacle> obstacleList = GameObject.FindObjectsOfType<Obstacle>().ToList();        //스테이지 안에 있는 장애물을 전부 찾아 리스트로 만듦
+
+        //장애물이 없는지 확인
+        if(obstacleList.Count== 0)
+        {
+            Debug.LogWarning("[Bglooper] 장애물이 하나도 없습니다.");
+            return;
+        }
+
+        Transform player = GameObject.FindWithTag("Player")?.transform; //태그 기반으로 플레이어 찾음
+        //없으면 로그
+        if(player == null)
+        {
+            Debug.Log("[Bglooper]플레이어를 찾을 수 없습니다.");
+            return;
+        }
+
+        obstacleCount = obstacleList.Count;         //재배치 할 장애물 수
+        obstacleLastPosition = player.position + new Vector3(10f, 0, 0);        //플레이어 보다 앞쪽(오른쪽)부터 장애물 배치 시작
+
+
+        //장애물 위치 재배치
+        for(int i = 0; i< obstacleCount; i++)       //obstacleCount(장애물 수)만큼 반복
+        {   
+            //장애물 리스트에서 랜덤하게 하나 꺼냄
+            int randIndex = Random.Range(0, obstacleList.Count);        
+            Obstacle selected = obstacleList[randIndex];
+
+            //꺼내진 장애물을 이전 장애물 위치를 기준으로 일정 거리 떨어진 위치에 배치함(SetRandomPlace에서 return 된 placePosition은 다음 장애물의 기준 위치로 사용)
+            obstacleLastPosition = selected.SetRandomPlace(obstacleLastPosition,obstacleCount);
+
+            obstacleList.RemoveAt(randIndex);       //리스트에서 해당 장애물을 제거하여 중복 방지
+        }
+        Debug.Log($"[Bglooper] 장애물 {obstacleCount}개 재배치 완료.");
+    }
 }
