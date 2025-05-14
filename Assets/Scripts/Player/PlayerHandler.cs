@@ -57,7 +57,7 @@ public class PlayerHandler : PlayerState
         if (isKnockback) return; 
         velocity.x = PlayerSpeed;
 
-        velocity.x = PlayerSpeed * itemInteraction.GetSpeedMultiplier();
+        velocity.x = PlayerSpeed * itemInteraction.GetSpeedMultiplier();        //속도배율을 포함해서 플레이어 이동 속도 설정
 
         animator.SetBool("IsRun", true);
 

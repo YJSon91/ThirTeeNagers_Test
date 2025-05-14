@@ -29,9 +29,11 @@ public class Item : MonoBehaviour
     }
     private void Update()
     {
+        //null 방어
         if (playerTransform == null) return;
 
-        float distance = transform.position.x - playerTransform.position.x;
+        float distance = transform.position.x - playerTransform.position.x;     //플레이어와 아이템 간에 거리 계산
+        //아이템과의 거리가 -10 이하이면 아이템 삭제
         if(distance < -10f )
         {
             Destroy(gameObject);
@@ -58,24 +60,24 @@ public class Item : MonoBehaviour
             case ItemType.Score:
                 GameManager.Instance.AddScore(1); // 점수 +1 증가 (GameManager의 AddScore 함수 호출)
                 Debug.Log("오렌지에 닿았음");
-                SoundManager.instance.PlayScore();
+                SoundManager.instance.PlayScore();  //오디오 클립 재생
                 break;
 
             case ItemType.Heal:
                 playerState.CurrentHealth += 1; // 체력 +1 증가 (최대치 제한은 PlayerState에서 처리)
-                healthUI.UpdateHealtDisplay(playerState.CurrentHealth);
-                SoundManager.instance.PlayItemPickUp();
+                healthUI.UpdateHealtDisplay(playerState.CurrentHealth);     //체력ui가 회복되는 것 처리
+                SoundManager.instance.PlayItemPickUp();                     //오디오 클립 재생
                 break;
 
             case ItemType.SpeedUp:
                 itemInteraction.ChangeMovementSpeed(true); // 속도 증가 효과 (1.5배)
-                itemInteraction.PlayTrailEffect(5);
-                SoundManager.instance.PlayItemPickUp();
+                itemInteraction.PlayTrailEffect(5);         //이펙트 5초동안 지속
+                SoundManager.instance.PlayItemPickUp();     //오디오 클립 재생
                 break;
 
             case ItemType.SpeedDown:
                 itemInteraction.ChangeMovementSpeed(false); // 속도 감소 효과 (0.5배)
-                SoundManager.instance.PlayItemPickUp();
+                SoundManager.instance.PlayItemPickUp();     //오디오 클립 재생
                 break;
         }
 
