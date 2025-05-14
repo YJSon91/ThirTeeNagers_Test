@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/karsiori/Scenes/SampleScene - Woods Tileset and Background.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/StageScene.unity
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScenes.unity
     guid: bfcc8e544753b4176bd5564a704af2e9
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 40b9db9a62bcb4d4d8f997bf6290f06b
   m_configObjects: {}
