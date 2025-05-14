@@ -98,6 +98,6 @@ public class FirstSceneManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // 3. ¾À ÀüÈ¯
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("TitleScene");
     }
 }
