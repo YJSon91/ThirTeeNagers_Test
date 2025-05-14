@@ -46,12 +46,22 @@ public class StageManager : MonoBehaviour
         GameManager.SetSurvivalTime(data.survivalTime);                 //생존 시간 지정
         GameManager.SetCurrentStage(data.stageNumber);
 
+        if (data.stageNumber == 1)
+        {
+            GameManager.Instance.Pause();
+            GameManager.Instance.TutorialBoard.SetActive(true);
+        }
+        else
+        {
+            GameManager.Instance.TutorialBoard.SetActive(false);
+        }
+
         //배경음 재생
         audioSource.clip = data.bgm;
         audioSource.Play();
 
         //스테이지가 로드 될때 생성되있던 장애물들 재배치
-        FindObjectOfType<Bglooper>()?.ResetObstacles();
+        StartCoroutine(DelayedResetObstacles());
 
         //시작
         GameManager.StageStart();
@@ -85,5 +95,11 @@ public class StageManager : MonoBehaviour
         LoadStage(selectData);
     }
 
+
+    private IEnumerator DelayedResetObstacles()
+    {
+        yield return null;
+        FindObjectOfType<Bglooper>().ResetObstacles();
+    }
     
 }

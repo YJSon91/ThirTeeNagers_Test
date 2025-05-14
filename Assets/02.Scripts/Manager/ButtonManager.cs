@@ -45,7 +45,7 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
         yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
-        GameManager.Instance.InitGame();                                            //게임매니저 초기화
+        GameManager.Instance.InitGame(GameManager.Instance.currentStage);                                            //게임매니저 초기화
     }
     public IEnumerator RestartRoutine2()
     {

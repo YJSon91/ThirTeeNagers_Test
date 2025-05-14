@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clearScoreTxt;
     [SerializeField] private GameObject stageClearPanel;
     [SerializeField] private GameObject GameClearPanel;
-    [SerializeField] private GameObject TutorialBoard;
+    [SerializeField] public GameObject TutorialBoard;
 
 
     [SerializeField] private bool _isGameOver = false;     //게임오버 확인 불리언
@@ -72,20 +72,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         
-        if (currentStage == 1)
-        {
-            GameManager.Instance.Pause();
-            TutorialBoard.SetActive(true);
-        }
-          
 
 
 
         //스테이지 선택 메뉴에서 할당받았는지 여부 확인
         if (StageDataHolder.Instance.selectedStage != null)
-        {  
+        {
             StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage); //선택된 스테이지의 값을 로드함
-        }   
+        }
         else
         {
             Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
@@ -209,11 +203,11 @@ public class GameManager : MonoBehaviour
     }
 
     //로비 -> 게임으로 들어갈때 완전 초기화 메서드
-    public void InitGame()
+    public void InitGame(int stageToRestart)
     {
         _isStageClear = false;
         _isGameOver = false;
-        _currentStage = 1;
+        _currentStage = stageToRestart;
         _requiredSurvivalTime = 0f;
         _score = 0;
         _player.PlayerSpeed = 3;
