@@ -70,14 +70,14 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {   //스테이지 선택 메뉴에서 할당받았는지 여부 확인
-        if(StageDataHolder.Instance.selectedStage != null)
-        {
-            StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);            //선택된 스테이지의 값을 로드함
-        }   
-        else
-        {
-            Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
-        }
+        //if(StageDataHolder.Instance.selectedStage != null)
+        //{
+        //    StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);            //선택된 스테이지의 값을 로드함
+        //}   
+        //else
+        //{
+        //    Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
+        //}
     }
 
     private void Update()
