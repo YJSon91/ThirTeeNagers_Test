@@ -37,4 +37,16 @@ public class StageUnlockManager : MonoBehaviour
         PlayerPrefs.Save();
         Debug.Log("스테이지 잠금 정보가 초기화 되었습니다.");
     }
+
+    public void UnlockAllStages()
+    {
+        int maxStage = stageButtons.Length;
+        PlayerPrefs.SetInt("UnlockStage", maxStage);
+        PlayerPrefs.Save();
+        Debug.Log("[StageUnlockManager] 모든 스테이지 언락 완료");
+        for (int i= 0;  i < stageButtons.Length; i++)
+        {
+            stageButtons[i].interactable = true;
+        }
+    }
 }

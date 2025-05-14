@@ -9,7 +9,7 @@ public class PlayerHandler : PlayerState
     Animator animator;
     Rigidbody2D _rigidbody2D;
     private HealthUI healthUI;
-    [SerializeField]private bool godMod = false;
+    [SerializeField]public bool godMod = false;
 
     // 아이템 효과에 의한 속도 배율 적용용
     private PlayerItemInteraction itemInteraction;
