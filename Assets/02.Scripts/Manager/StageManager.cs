@@ -44,6 +44,7 @@ public class StageManager : MonoBehaviour
         player.transform.position = data.spawnPosition;                 //데이터의 스폰포지션을 토대로 플레이어의 생성 위치를 지정
         player.PlayerSpeed = data.playerSpeed;                          //플레이어 스피드 지정
         GameManager.SetSurvivalTime(data.survivalTime);                 //생존 시간 지정
+        GameManager.SetCurrentStage(data.stageNumber);
 
         //배경음 재생
         audioSource.clip = data.bgm;
@@ -83,4 +84,6 @@ public class StageManager : MonoBehaviour
     {
         LoadStage(selectData);
     }
+
+    
 }

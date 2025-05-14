@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clearBestScoreTxt;
     [SerializeField] private TextMeshProUGUI clearScoreTxt;
     [SerializeField] private GameObject stageClearPanel;
+    [SerializeField] private GameObject GameClearPanel;
 
 
 
@@ -161,13 +162,22 @@ public class GameManager : MonoBehaviour
     //TODO:스테이지 클리어 UI를 만들고(다음 스테이지로 갈지 스타트씬?으로 갈지 결정) 켜주기
     public void StageClear()
     {
-        stageClearPanel.SetActive(true);
+        _isStageClear = true;
         UpdateHighScore(score);
         clearBestScoreTxt.text = bestScore.ToString();
         clearScoreTxt.text = score.ToString();
-        _isStageClear = true;
         Debug.Log("StageClear");
-        _currentStage += 1;             //스테이지 ++
+        if(currentStage >= 5)
+        {
+            GameClear();
+        }
+        else
+        {
+            stageClearPanel.SetActive(true);
+        }
+
+
+            _currentStage += 1;             //스테이지 ++
 
         //_player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
 
@@ -234,5 +244,17 @@ public class GameManager : MonoBehaviour
     {
         stageClearPanel.SetActive(false);
         _isStageClear = false;
+    }
+
+    public void GameClear()
+    {
+        GameClearPanel.SetActive(true);
+        Time.timeScale = 0f;
+        Debug.Log("GameClear");
+    }
+
+    public void SetCurrentStage(int stageNumber)
+    {
+        _currentStage = stageNumber;
     }
 }
