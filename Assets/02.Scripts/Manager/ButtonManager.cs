@@ -73,5 +73,10 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene("TitleScene");
     }
+    public void TutorialBoardClick()
+    {
+        GameObject btn = GameObject.Find("TutorialBoard"); //이름으로 게임 오브젝트 검색후 btn에 넣음
+        btn.SetActive(false);
+    }
 
 }
