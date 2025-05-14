@@ -10,7 +10,8 @@ public class SettingMenu : MonoBehaviour
     [SerializeField] private GameObject settingPanel;                   //세팅 메뉴 패널
     [SerializeField] private AudioSource sfxaudioSource;                   //
     [SerializeField] private AudioSource bgmaudioSource;
-    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider sfxvolumeSlider;
+    [SerializeField] private Slider bgmvolumeSlider;
     [SerializeField] private Toggle bgmMuteToggle;
     [SerializeField] private Toggle sfxMuteToggle;
 
@@ -43,31 +44,43 @@ public class SettingMenu : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        float savedVolume = PlayerPrefs.GetFloat("Volume", 1f);
+        float savedSfxVolume = PlayerPrefs.GetFloat("sfxVolume", 1f);
+        float savedBgmVolume = PlayerPrefs.GetFloat("bgmVolume", 1f);
         bool isBgmMute = PlayerPrefs.GetInt("bgmmute", 0) == 1;
         bool isSfxMute = PlayerPrefs.GetInt("sfxmute", 0) == 1;
 
 
 
-        volumeSlider.value = savedVolume;
+        sfxvolumeSlider.value = savedSfxVolume;
+        bgmvolumeSlider.value = savedBgmVolume;
         bgmMuteToggle.isOn = !isBgmMute;
         sfxMuteToggle.isOn = !isSfxMute;
 
-        sfxaudioSource.volume = savedVolume;
+        sfxaudioSource.volume = savedSfxVolume;
+        bgmvolumeSlider.value = savedBgmVolume;
         sfxaudioSource.mute = isSfxMute;
         bgmaudioSource.mute = isBgmMute;
 
-        volumeSlider.onValueChanged.AddListener(SetVolume);
+        sfxvolumeSlider.onValueChanged.AddListener(SetSfxVolume);
+        bgmvolumeSlider.onValueChanged.AddListener(SetBgmVolume);
         bgmMuteToggle.onValueChanged.AddListener(OnbgmMuteToggleChanged);
         sfxMuteToggle.onValueChanged.AddListener(OnsfxMuteToggleChanged);
     }
 
-    public void SetVolume(float value)
+    public void SetSfxVolume(float value)
     {
         sfxaudioSource.volume = value;
-        PlayerPrefs.SetFloat("Volume", value);
+        PlayerPrefs.SetFloat("sfxVolume", value);
         PlayerPrefs.Save();
     }
+    public void SetBgmVolume(float value)
+    {
+        bgmaudioSource.volume = value;
+        PlayerPrefs.SetFloat("bgmVolume", value);
+        PlayerPrefs.Save();
+    }
+
+
     private void OnbgmMuteToggleChanged(bool isOn)
     {
         bool isMute = !isOn;
