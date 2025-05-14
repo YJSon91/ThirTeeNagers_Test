@@ -17,4 +17,4 @@ MonoBehaviour:
   survivalTime: 60
   playerSpeed: 6
   backgroundPrefab: {fileID: 1372115713226725831, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
-  bgm: {fileID: 8300000, guid: 98ee6b0c425b6e84ca5edad64c15f3dd, type: 3}
+  bgm: {fileID: 8300000, guid: cc7a8d5ae50260b46acd222923ab6271, type: 3}
