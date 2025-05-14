@@ -84,6 +84,7 @@ public class PlayerItemInteraction : MonoBehaviour
             activeParticle = null;                  //다시 실행하게 초기화
         }
     }
+    //속도 배율 캡슐화
     public float GetSpeedMultiplier()
     {
         return currentSpeedMultiplier;
