@@ -68,7 +68,7 @@ public class ButtonManager : MonoBehaviour
         PausePanel.SetActive(false);
         GameManager.Instance.Resume();
     }
-
+    //시작 화면으로 이동
     public void GoTitleScreen()
     {
         SceneManager.LoadScene("TitleScene");

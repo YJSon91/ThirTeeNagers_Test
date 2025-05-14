@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerState _player;       //게임오버를 위한 player 가져옴
     [SerializeField] private Slider survivalTimeSlider;          //살아남는 시간 표현 슬라이더
     [SerializeField] private TextMeshProUGUI scoreTxt;     //점수 텍스트
-    [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI bestScoreTxt;
     [SerializeField] private TextMeshProUGUI clearBestScoreTxt;
     [SerializeField] private TextMeshProUGUI clearScoreTxt;
-    [SerializeField] private GameObject StageClearPanel;
+    [SerializeField] private GameObject stageClearPanel;
 
 
 
@@ -39,11 +39,8 @@ public class GameManager : MonoBehaviour
     //스테이지 번호 프로퍼티
     public int currentStage { get { return _currentStage; } }
 
-    [SerializeField] private float _baseSurvivalTime = 30f;     //버텨야 하는 시간 default
     [SerializeField] private float _requiredSurvivalTime = 0f;  //실제 버텨야하는 시간
-    [SerializeField] private float _increaseDuration = 10f;  //스테이지 거듭할 수록 늘어날 시간 증가값
-    [SerializeField] private int _increaseSpeed = 1;   //스테이지 거듭할 수록 스피드 증가값
-    [SerializeField] private int PlayerSpeed;
+
 
     private const string BestScoreKey = "BestScore";
 
@@ -59,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        //
         bestScore = PlayerPrefs.GetInt(BestScoreKey,0);
         bestScoreTxt.text = bestScore.ToString();
 
@@ -117,15 +114,6 @@ public class GameManager : MonoBehaviour
             GameOver();
             return;
         }
-        //일시정지 불값에 따라 시간을 멈추고 흐르게 함
-        if(_isPause)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
     }
 
     //스테이지 시작시 초기화
@@ -163,7 +151,7 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
         Time.timeScale = 0f;
-        GameOverPanel.SetActive(true);
+        gameOverPanel.SetActive(true);
         SoundManager.instance.PlayDeath();
         
     }
@@ -173,7 +161,7 @@ public class GameManager : MonoBehaviour
     //TODO:스테이지 클리어 UI를 만들고(다음 스테이지로 갈지 스타트씬?으로 갈지 결정) 켜주기
     public void StageClear()
     {
-        StageClearPanel.SetActive(true);
+        stageClearPanel.SetActive(true);
         UpdateHighScore(score);
         clearBestScoreTxt.text = bestScore.ToString();
         clearScoreTxt.text = score.ToString();
@@ -215,21 +203,18 @@ public class GameManager : MonoBehaviour
         return _player.PlayerSpeed; // 현재는 임시값, 추후 게임 진행에 따라 증가하도록 변경 가능
     }
 
-    //TODO: UI만들고 연결하기(UI매니저로 실시)
-    //TODO:게임오버 조건 만들기 , UI만들고 연결하기(UI매니저로 실시)
-    //player스크립트 연결 후([serializeField]로 변수를 만든 후 인스펙터에서 직접 연결
-
+    //일시정지 메서드
     public void Pause()
     {
         _isPause = true;
+        Time.timeScale = 0f;
     }
 
-
+    //재개 메서드
     public void Resume()
     {
         _isPause = false;
-
-
+        Time.timeScale = 1f;
 
     }
 
@@ -247,7 +232,7 @@ public class GameManager : MonoBehaviour
     //스테이지 클리어 패널을 닫아주는 함수
     public void CloseStageClearPanel()
     {
-        StageClearPanel.SetActive(false);
+        stageClearPanel.SetActive(false);
         _isStageClear = false;
     }
 }
