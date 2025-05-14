@@ -3536,7 +3536,7 @@ MonoBehaviour:
   _player: {fileID: 935364270}
   survivalTimeSlider: {fileID: 329847112}
   scoreTxt: {fileID: 27190966}
-  gameOverPanel: {fileID: 0}
+  gameOverPanel: {fileID: 2124344459}
   bestScoreTxt: {fileID: 277684632}
   clearBestScoreTxt: {fileID: 1854657071}
   clearScoreTxt: {fileID: 1501257713}
@@ -8330,6 +8330,9 @@ MonoBehaviour:
   stageList:
   - {fileID: 11400000, guid: c79d4a1264e64f7488c4a487f01345ea, type: 2}
   - {fileID: 11400000, guid: 5639828b7e768a940a82fd5edffc603b, type: 2}
+  - {fileID: 11400000, guid: 545eee918154cc247bf4b328a14683cb, type: 2}
+  - {fileID: 11400000, guid: f47de19b7f2f95544befaef09fd59e83, type: 2}
+  - {fileID: 11400000, guid: 2a4ae9c3caaaa4d46915ab027e295483, type: 2}
   player: {fileID: 935364270}
   GameManager: {fileID: 852120248}
   audioSource: {fileID: 1944710116}

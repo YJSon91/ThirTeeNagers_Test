@@ -49,6 +49,9 @@ public class StageManager : MonoBehaviour
         audioSource.clip = data.bgm;
         audioSource.Play();
 
+        //스테이지가 로드 될때 생성되있던 장애물들 재배치
+        FindObjectOfType<Bglooper>()?.ResetObstacles();
+
         //시작
         GameManager.StageStart();
     }
