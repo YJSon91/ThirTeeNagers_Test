@@ -5247,6 +5247,7 @@ MonoBehaviour:
   clearScoreTxt: {fileID: 1501257713}
   stageClearPanel: {fileID: 2112246476}
   GameClearPanel: {fileID: 216624394}
+  TutorialBoard: {fileID: 1109651177}
   _isGameOver: 0
   _isStageClear: 0
   _isPause: 0
@@ -7008,7 +7009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1109651178
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10240,7 +10241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1538315316
 RectTransform:
   m_ObjectHideFlags: 0

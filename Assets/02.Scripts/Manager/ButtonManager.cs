@@ -24,6 +24,8 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject GameOverPanel;
 
+   
+
 
     //시작할때 초기화(비활성화가 default)
     private void Start()
@@ -44,6 +46,12 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
         yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
         GameManager.Instance.InitGame();                                            //게임매니저 초기화
+    }
+    public IEnumerator RestartRoutine2()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
+        yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
+                                   
     }
 
     //게임 종료(에디터일 경우 플레이모드 해제, 빌드 후일 경우 게임 종료)
@@ -75,8 +83,14 @@ public class ButtonManager : MonoBehaviour
     }
     public void TutorialBoardClick()
     {
+        
         GameObject btn = GameObject.Find("TutorialBoard"); //이름으로 게임 오브젝트 검색후 btn에 넣음
         btn.SetActive(false);
+
+        GameManager.Instance.Resume();
+
+
+
     }
 
 }
