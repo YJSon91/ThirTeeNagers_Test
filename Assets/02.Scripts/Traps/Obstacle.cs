@@ -44,7 +44,7 @@ public class Obstacle : MonoBehaviour
                         placePosition.y = 0.5f; // 중간 라인 (예시)
                         break;
                     case 1:
-                        placePosition.y = -0.75f; // 아래쪽
+                        placePosition.y = -0.5f; // 아래쪽
                         break;
                    
                 }   
