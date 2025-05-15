@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -105,4 +106,8 @@ public class StageManager : MonoBehaviour
         FindObjectOfType<Bglooper>().ResetObstacles();
     }
     
+    public StageData GetStageDataByNumber(int stageNumber)
+    {
+        return stageList.FirstOrDefault(s => s.stageNumber == stageNumber); 
+    }
 }

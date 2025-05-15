@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
+using static UnityEditorInternal.VersionControl.ListControl;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -38,26 +38,33 @@ public class ButtonManager : MonoBehaviour
     //딜레이주고 리스타트 
     public void RestartGame()
     {
-        StartCoroutine(RestartRoutine());
-        SFXManager.instance.PlayOnButtonClick();
-        Time.timeScale = 1.0f;
-    }
-    //리스타트 메서드
-    public IEnumerator RestartRoutine()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
-        yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
-        GameManager.Instance.InitGame(GameManager.Instance.currentStage);                                            //게임매니저 초기화
-    }
-    public IEnumerator RestartRoutine2()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
-        yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
-        GameManager.Instance.InitGame(GameManager.Instance.currentStage);
+        Time.timeScale = 1f;
+        int lastStage = PlayerPrefs.GetInt("LastStage", 1);
+        PlayerPrefs.SetInt("TempStageToRestart",lastStage);
+        GameManager.IsResatarting = true;
+        SceneManager.sceneLoaded += OnSceneReloaded;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    //게임 종료(에디터일 경우 플레이모드 해제, 빌드 후일 경우 게임 종료)
-    public void ExitGame()
+    private void OnSceneReloaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneReloaded;
+        int stageToRestart = PlayerPrefs.GetInt("TempStageToRestart");
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.InitGame(stageToRestart);
+            GameManager.Instance.StageStart();
+        }
+        else
+        {
+            Debug.LogWarning("GameManager.Instance is null after scene load!");
+        }
+    }
+
+
+//게임 종료(에디터일 경우 플레이모드 해제, 빌드 후일 경우 게임 종료)
+public void ExitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
