@@ -11,7 +11,6 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] private PlayerHandler player;          //플레이어 정보
     [SerializeField] private GameManager GameManager;       //게임매니저 정보
-    [SerializeField] private AudioSource audioSource;       //bgm 재생용 오디오 소스
 
     //싱글톤 화
     private void Awake()
@@ -56,9 +55,6 @@ public class StageManager : MonoBehaviour
             GameManager.Instance.TutorialBoard.SetActive(false);
         }
 
-        //배경음 재생
-        audioSource.clip = data.bgm;
-        audioSource.Play();
 
         //스테이지가 로드 될때 생성되있던 장애물들 재배치
         StartCoroutine(DelayedResetObstacles());

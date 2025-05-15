@@ -32,6 +32,8 @@ public class FirstSceneManager : MonoBehaviour
         loadingBar.maxValue = 1f;
         loadingBar.value = 0;
 
+        BgmManager.instance.PlayTitleBgm();
+
     }
 
     void Update()

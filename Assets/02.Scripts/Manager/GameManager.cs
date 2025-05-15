@@ -72,7 +72,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         
-
+        var stageData = StageManager.instance.currentStageData;
+        if(stageData != null )
+        {
+            BgmManager.instance.PlayStageBgm(stageData.stageNumber);
+        }
 
 
         //스테이지 선택 메뉴에서 할당받았는지 여부 확인
