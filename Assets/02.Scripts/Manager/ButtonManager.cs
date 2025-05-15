@@ -40,6 +40,7 @@ public class ButtonManager : MonoBehaviour
     {
         StartCoroutine(RestartRoutine());
         SFXManager.instance.PlayOnButtonClick();
+        Time.timeScale = 1.0f;
     }
     //리스타트 메서드
     public IEnumerator RestartRoutine()
@@ -52,7 +53,7 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           //씬 다시 불러오기
         yield return new WaitForSeconds(0.1f);                                      //0.1초 기다림
-                                   
+        GameManager.Instance.InitGame(GameManager.Instance.currentStage);
     }
 
     //게임 종료(에디터일 경우 플레이모드 해제, 빌드 후일 경우 게임 종료)
