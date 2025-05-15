@@ -49,8 +49,13 @@ public class FirstSceneManager : MonoBehaviour
         {
             isLoading = true;
             loadingPannel.SetActive(true);
+            if(BgmManager.instance != null )
+            {
+                BgmManager.instance.StopBgm();
+            }
 
             loadingTextCoroutine = StartCoroutine(LoadingDotRoutine());
+
         }
 
         // 로딩 중일 때 로딩 진행

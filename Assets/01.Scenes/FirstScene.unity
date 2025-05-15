@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76647db2a22d9c5429e41de26d94e082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleBgm: {fileID: 8300000, guid: cc7a8d5ae50260b46acd222923ab6271, type: 3}
+  titleBgm: {fileID: 8300000, guid: 2504e55fd7e27a14d98e551eee49a568, type: 3}
   stageDataList:
   - {fileID: 11400000, guid: c79d4a1264e64f7488c4a487f01345ea, type: 2}
   - {fileID: 11400000, guid: 5639828b7e768a940a82fd5edffc603b, type: 2}

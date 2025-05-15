@@ -64,9 +64,21 @@ public class BgmManager : MonoBehaviour
 
     private void PlayBgm(AudioClip clip)
     {
-        if (audioSource.clip == clip) return;
+        if (audioSource.clip == clip && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+            return;
+        }
         audioSource.clip = clip;
         audioSource.Play();
+    }
+
+    public void StopBgm()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
     }
 
 }

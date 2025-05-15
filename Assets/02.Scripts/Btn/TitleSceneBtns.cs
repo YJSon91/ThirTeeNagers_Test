@@ -21,4 +21,9 @@ public class TitleSceneBtns : MonoBehaviour
         #endif
     }
 
+    private void Start()
+    {
+        BgmManager.instance.PlayTitleBgm();
+    }
+
 }
