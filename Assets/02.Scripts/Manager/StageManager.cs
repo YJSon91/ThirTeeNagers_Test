@@ -27,6 +27,10 @@ public class StageManager : MonoBehaviour
 
     public void LoadStage(StageData data)
     {
+        if(Camera.main != null)
+        {
+            Camera.main.backgroundColor = data.backgroundColor;
+        }
         //기존 스테이지 정리
         GameObject oldstage = GameObject.Find("StageRoot");         //stageroot 게임오브젝트를 찾고 oldstage에 할당
         //oldstage가 있으면 파괴

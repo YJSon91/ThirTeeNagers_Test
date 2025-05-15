@@ -12,5 +12,6 @@ public class StageData : ScriptableObject	//ø∑ø° scriptableobject∏¶ ¿˚¿∏∏È »∞º∫»
     public float playerSpeed;					//¿Ø¿˙ ¿Ãµøº”µµ
     public GameObject backgroundPrefab;		//πË∞Ê «¡∏Æ∆’
     public AudioClip bgm;					//πË∞Ê¿Ωæ«
+    public Color backgroundColor;
 
 }
