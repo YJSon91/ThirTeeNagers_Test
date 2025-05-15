@@ -84,7 +84,7 @@ public class PlayerHandler : PlayerState
             isJump = false; // 점프 상태를 false로 바꿔줌
         }
 
-        if (isSliding) // 플레이어가 점프 상태라면
+        if (isSliding) // 플레이어가 슬라이딩 상태라면
         {
             SoundManager.instance.PlayJump();
           
