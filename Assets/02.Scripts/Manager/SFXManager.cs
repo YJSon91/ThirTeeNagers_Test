@@ -12,6 +12,18 @@ public class SFXManager : MonoBehaviour
     public AudioClip buttonOnClickClip;
     public AudioClip buttonOffClickClip;
 
+    public float volume
+    {
+        get => audioSource.volume;
+        set => audioSource.volume = value;
+    }
+    public bool mute
+    {
+        get => audioSource.mute;
+        set => audioSource.mute = value;
+
+    }
+
     private void Awake()
     {
         if(instance != null & instance != this)

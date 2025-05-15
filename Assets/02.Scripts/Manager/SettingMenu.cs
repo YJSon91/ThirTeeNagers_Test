@@ -66,9 +66,15 @@ public class SettingMenu : MonoBehaviour
         sfxMuteToggle.isOn = !isSfxMute;
 
         sfxaudioSource.volume = savedSfxVolume;
-        bgmaudioSource.volume = savedBgmVolume;
+        SFXManager.instance.volume = savedSfxVolume;
+        SFXManager.instance.mute = isSfxMute;
         sfxaudioSource.mute = isSfxMute;
-        bgmaudioSource.mute = isBgmMute;
+
+        if(BgmManager.instance != null)
+        {
+            BgmManager.instance.volume = savedBgmVolume;
+            BgmManager.instance.mute = isBgmMute;
+        }
 
         sfxvolumeSlider.onValueChanged.AddListener(SetSfxVolume);
         bgmvolumeSlider.onValueChanged.AddListener(SetBgmVolume);
@@ -99,6 +105,10 @@ public class SettingMenu : MonoBehaviour
 
     public void SetSfxVolume(float value)
     {
+        if(SFXManager.instance != null)
+        {
+            SFXManager.instance.volume = value;
+        }
         sfxaudioSource.volume = value;
         PlayerPrefs.SetFloat("sfxVolume", value);
         PlayerPrefs.Save();
@@ -106,7 +116,10 @@ public class SettingMenu : MonoBehaviour
     }
     public void SetBgmVolume(float value)
     {
-        bgmaudioSource.volume = value;
+        if(BgmManager.instance != null)
+        {
+            BgmManager.instance.volume = value;
+        }
         PlayerPrefs.SetFloat("bgmVolume", value);
         PlayerPrefs.Save();
     }
@@ -115,13 +128,20 @@ public class SettingMenu : MonoBehaviour
     private void OnbgmMuteToggleChanged(bool isOn)
     {
         bool isMute = !isOn;
-        bgmaudioSource.mute = isMute;
+        if(BgmManager.instance != null)
+        {
+            BgmManager.instance.mute = isMute;
+        }
         PlayerPrefs.SetInt("bgmmute", isMute ? 1 : 0);
         PlayerPrefs.Save();
     }
     private void OnsfxMuteToggleChanged(bool isOn)
     {
         bool ismute = !isOn;
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.mute = ismute;
+        }
         sfxaudioSource.mute = ismute;
         PlayerPrefs.SetInt("sfxmute", ismute ? 1 : 0);
         PlayerPrefs.Save();
