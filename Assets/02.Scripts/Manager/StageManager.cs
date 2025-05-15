@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] private PlayerHandler player;          //플레이어 정보
     [SerializeField] private GameManager GameManager;       //게임매니저 정보
+    [SerializeField] private HealthUI healthUI;
 
     //싱글톤 화
     private void Awake()
@@ -86,6 +87,8 @@ public class StageManager : MonoBehaviour
                 Debug.Log("마지막 스테이지입니다.");
             }
         }
+        player.CurrentHealth = 3;
+        healthUI.UpdateHealtDisplay(player.CurrentHealth);
 
     }
 

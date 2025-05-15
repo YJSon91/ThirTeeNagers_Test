@@ -8,7 +8,7 @@ public class PlayerState : MonoBehaviour
     public int CurrentHealth
     {
         get { return currenthealth; }
-        set { currenthealth = Mathf.Clamp(value, 0, 5); }  // 현재체력이 0보다 낮을 수 없고 5보다 높을 수 없음.(최소값 및 최대값 설정)
+        set { currenthealth = Mathf.Clamp(value, 0, 3); }  // 현재체력이 0보다 낮을 수 없고 5보다 높을 수 없음.(최소값 및 최대값 설정)
 
     }
 
@@ -16,7 +16,7 @@ public class PlayerState : MonoBehaviour
     public int MaxHealth
     {
         get { return maxhealth; }
-        set { maxhealth = Mathf.Clamp(value, 0, 5); } // 최대체력이 0보다 낮을 수 없고 5보다 높을 수 없음.(최소값 및 최대값 설정)
+        set { maxhealth = Mathf.Clamp(value, 0, 3); } // 최대체력이 0보다 낮을 수 없고 5보다 높을 수 없음.(최소값 및 최대값 설정)
 
     }
 
