@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -11,13 +10,12 @@ public class SettingMenu : MonoBehaviour
     [SerializeField] private GameObject pausePanel;                     //일시정지 메뉴 패널
     [SerializeField] private GameObject settingPanel;                   //세팅 메뉴 패널
     [SerializeField] private AudioSource sfxaudioSource;                   //
+    [SerializeField] private AudioSource bgmaudioSource;
     [SerializeField] private Slider sfxvolumeSlider;
     [SerializeField] private Slider bgmvolumeSlider;
     [SerializeField] private Toggle bgmMuteToggle;
     [SerializeField] private Toggle sfxMuteToggle;
     [SerializeField] private Toggle godModeToggle;
-
-    private BgmManager bgmManager;
 
     private PlayerHandler playerHandler;
 
@@ -52,21 +50,6 @@ public class SettingMenu : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        bgmManager= BgmManager.instance;
-        if (bgmManager != null)
-        {
-            bgmvolumeSlider.value = PlayerPrefs.GetFloat("bgmVolume", 1f);
-            bgmMuteToggle.isOn = !PlayerPrefs.GetInt("bgmmute", 0).Equals(1);
-
-            bgmManager.volume = bgmvolumeSlider.value;
-            bgmManager.mute = !bgmMuteToggle.isOn;
-
-            bgmvolumeSlider.onValueChanged.AddListener(SetBgmVolume);
-            bgmMuteToggle.onValueChanged.AddListener(OnbgmMuteToggleChanged);
-        }
-
-
-
 
         float savedSfxVolume = PlayerPrefs.GetFloat("sfxVolume", 1f);
         float savedBgmVolume = PlayerPrefs.GetFloat("bgmVolume", 1f);
@@ -81,7 +64,9 @@ public class SettingMenu : MonoBehaviour
         sfxMuteToggle.isOn = !isSfxMute;
 
         sfxaudioSource.volume = savedSfxVolume;
+        bgmaudioSource.volume = savedBgmVolume;
         sfxaudioSource.mute = isSfxMute;
+        bgmaudioSource.mute = isBgmMute;
 
         sfxvolumeSlider.onValueChanged.AddListener(SetSfxVolume);
         bgmvolumeSlider.onValueChanged.AddListener(SetBgmVolume);
@@ -89,7 +74,7 @@ public class SettingMenu : MonoBehaviour
         sfxMuteToggle.onValueChanged.AddListener(OnsfxMuteToggleChanged);
 
 
-        if (StageManager.instance.currentStageData.stageNumber < 5)
+        if(StageManager.instance.currentStageData.stageNumber < 5)
         {
             godModeToggle.interactable = false;
             godModeToggle.isOn = false;
@@ -99,11 +84,10 @@ public class SettingMenu : MonoBehaviour
         else
         {
             {
-                godModeToggle.interactable = true;
+                godModeToggle.interactable= true;
                 godModeToggle.isOn = playerHandler.godMod;
             }
         }
-
         godModeToggle.onValueChanged.AddListener((isOn) =>
         {
             playerHandler.godMod = isOn;
@@ -119,24 +103,18 @@ public class SettingMenu : MonoBehaviour
     }
     public void SetBgmVolume(float value)
     {
-        if (bgmManager != null)
-        {
-            bgmManager.volume = value;
-            PlayerPrefs.SetFloat("bgmVolume", value);
-            PlayerPrefs.Save();
-        }
+        bgmaudioSource.volume = value;
+        PlayerPrefs.SetFloat("bgmVolume", value);
+        PlayerPrefs.Save();
     }
 
 
     private void OnbgmMuteToggleChanged(bool isOn)
     {
-        if (bgmManager != null)
-        {
-            bool isMute = !isOn;
-            bgmManager.mute = isMute;
-            PlayerPrefs.SetInt("bgmmute", isMute ? 1 : 0);
-            PlayerPrefs.Save();
-        }
+        bool isMute = !isOn;
+        bgmaudioSource.mute = isMute;
+        PlayerPrefs.SetInt("bgmmute", isMute ? 1 : 0);
+        PlayerPrefs.Save();
     }
     private void OnsfxMuteToggleChanged(bool isOn)
     {

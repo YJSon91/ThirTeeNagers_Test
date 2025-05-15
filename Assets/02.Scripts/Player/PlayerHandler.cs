@@ -8,6 +8,7 @@ public class PlayerHandler : PlayerState
 {
     Animator animator;
     Rigidbody2D _rigidbody2D;
+    Transform _transform;
     private HealthUI healthUI;
     [SerializeField]public bool godMod = false;
 
@@ -15,6 +16,8 @@ public class PlayerHandler : PlayerState
     private PlayerItemInteraction itemInteraction;
 
     private bool isInvincible = false;
+    private Vector3 originalScale;
+    private bool canSlide = true;
 
     private void Awake()
     {
@@ -35,6 +38,12 @@ public class PlayerHandler : PlayerState
         {
             Debug.Log("PlayerItemInteraction 스크립트가 없습니다.");
         }
+
+        _transform = GetComponent<Transform>();
+        if (_transform == null)
+        {
+            Debug.Log("트랜스폼이 할당되지 않았습니다.");
+        }
         CurrentHealth = MaxHealth;
         healthUI = FindObjectOfType<HealthUI>();
         healthUI.SetMaxHealth(MaxHealth);
@@ -47,12 +56,18 @@ public class PlayerHandler : PlayerState
             TakeDamage(1, transform.position,true);
         }
     }
+    private void Start()
+    {
+        originalScale = transform.localScale;
+    }
 
     private void FixedUpdate()
     {
         if (isDead) return; //플레이어가 죽은 상태면 아무것도 안하고 빠져나간다.
 
         Vector3 velocity = _rigidbody2D.velocity; // RigidBody2D에 있는 velocity를 복사
+        Vector3 playerScale = _transform.localScale;
+
 
         if (isKnockback) return; 
         velocity.x = PlayerSpeed;
@@ -67,6 +82,16 @@ public class PlayerHandler : PlayerState
             velocity.y += JumpForce; // JumForce 만큼 더해줌
             animator.SetBool("IsJump", true);
             isJump = false; // 점프 상태를 false로 바꿔줌
+        }
+
+        if (isSliding) // 플레이어가 점프 상태라면
+        {
+            SoundManager.instance.PlayJump();
+          
+            playerScale.y = 0.2f;
+            transform.localScale = playerScale; // 👈 이걸 반드시 해야 적용됨
+
+            isSliding = false; // 점프 상태를 false로 바꿔줌
         }
 
         if (_rigidbody2D.velocity.y < -0.1f)
@@ -88,6 +113,24 @@ public class PlayerHandler : PlayerState
             CurrentJumpCount++;
             Debug.Log("현재 점프" + CurrentJumpCount);
             Debug.Log("맥스점프" + MaxJumpCount);
+        }
+    }
+    private void OnSliding(InputValue inputValue)
+    {
+        if (!isSliding && canSlide)
+        {
+            isSliding = true;
+            canSlide = false; // 입력 막기
+
+            // 스케일 축소
+            Vector3 newScale = transform.localScale;
+            newScale.y = 0.2f;
+            transform.localScale = newScale;
+
+            // 사운드 실행
+
+            // 일정 시간 뒤에 복구
+            StartCoroutine(ResetScaleAfterDelay(0.5f));
         }
     }
 
@@ -157,5 +200,19 @@ public class PlayerHandler : PlayerState
         yield return new WaitForSeconds(HitCooldown);
 
         isInvincible = false;
+    }
+    private IEnumerator ResetScaleAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // 스케일 복구
+        Vector3 resetScale = transform.localScale;
+        resetScale.y = 1f;
+        transform.localScale = resetScale;
+
+        isSliding = false;
+
+        yield return new WaitForSeconds(0.15f); // 재입력 딜레이
+        canSlide = true; // 다시 슬라이드 가능
     }
 }
