@@ -9,7 +9,7 @@ public class StageData : ScriptableObject	//¿·¿¡ scriptableobject¸¦ ÀûÀ¸¸é È°¼ºÈ
     public Vector3 spawnPosition;			//Ä³¸¯ÅÍ »ı¼º Æ÷ÀÎÆ®
     public int stageNumber;					//½ºÅ×ÀÌÁö ¹øÈ£
     public float survivalTime;				//»ıÁ¸ÇØ¾ß ÇÏ´Â ½Ã°£
-    public int playerSpeed;					//À¯Àú ÀÌµ¿¼Óµµ
+    public float playerSpeed;					//À¯Àú ÀÌµ¿¼Óµµ
     public GameObject backgroundPrefab;		//¹è°æ ÇÁ¸®ÆÕ
     public AudioClip bgm;					//¹è°æÀ½¾Ç
 

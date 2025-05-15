@@ -64,7 +64,7 @@ public class SettingMenu : MonoBehaviour
         sfxMuteToggle.isOn = !isSfxMute;
 
         sfxaudioSource.volume = savedSfxVolume;
-        bgmvolumeSlider.value = savedBgmVolume;
+        bgmaudioSource.volume = savedBgmVolume;
         sfxaudioSource.mute = isSfxMute;
         bgmaudioSource.mute = isBgmMute;
 

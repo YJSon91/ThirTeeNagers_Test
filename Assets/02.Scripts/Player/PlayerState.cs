@@ -21,12 +21,12 @@ public class PlayerState : MonoBehaviour
     }
 
 
-    [SerializeField] private int playerSpeed = 3; //플레이어 속도
+    [SerializeField] private float playerSpeed = 3; //플레이어 속도
 
-    public int PlayerSpeed
+    public float PlayerSpeed
     {
         get { return playerSpeed; }
-        set { playerSpeed = Mathf.Clamp(value, 0, 10); } // 플레이어 속도가 0보다 낮을 수 없고 10보다 높을 수 없음.(최소값 및 최대값 설정)
+        set { playerSpeed = Mathf.Clamp(value, 0, 20); } // 플레이어 속도가 0보다 낮을 수 없고 10보다 높을 수 없음.(최소값 및 최대값 설정)
     }
 
     [SerializeField] private float jumpForce = 3; // 플레이어 점프 속도 (점프 속도는 고정으로 하기 위해 읽기만 가능)
@@ -79,6 +79,7 @@ public class PlayerState : MonoBehaviour
     public bool isKnockback = false;
     public bool isDead = false; // 플레이어가 죽었는지 체크
     public bool isJump = false; // 플레이어가 점프 상태인지 체크
+    public bool isSliding = false; // 플레이어가 점프 상태인지 체크
 
 
 }
