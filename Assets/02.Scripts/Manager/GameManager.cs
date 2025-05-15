@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isPause = false;         //일시정지 확인 불리언
     [SerializeField] private int _score = 0;    //점수 변수
     private int bestScore;
+
+    public static bool IsResatarting = false;
     
     //점수 프로퍼티
     public int score
@@ -71,23 +73,56 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-      
-        //스테이지 선택 메뉴에서 할당받았는지 여부 확인
-        if (StageDataHolder.Instance.selectedStage != null)
+        //if (!IsResatarting)
+        //{
+        //    //스테이지 선택 메뉴에서 할당받았는지 여부 확인
+        //    if (StageDataHolder.Instance.selectedStage != null)
+        //    {
+        //        StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage); //선택된 스테이지의 값을 로드함
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
+        //    }
+        //}
+        if (IsResatarting)
         {
-            StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage); //선택된 스테이지의 값을 로드함
+            int stageToRestart = PlayerPrefs.GetInt("TempStageToRestart", 1);
+
+            StageData data = StageManager.instance.GetStageDataByNumber(stageToRestart);
+            if (data != null)
+            {
+                StageManager.instance.LoadStage(data);
+                BgmManager.instance.PlayStageBgm(data.stageNumber);
+            }
+            else
+            {
+                {
+                    Debug.LogError($"[GameManager] 스테이지 {stageToRestart} 데이터를 찾을 수 없습니다.");
+                }
+            }
+            IsResatarting = false;
         }
         else
         {
-            Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
+            if (StageDataHolder.Instance.selectedStage != null)
+            {
+                StageManager.instance.LoadStage(StageDataHolder.Instance.selectedStage);
+                BgmManager.instance.PlayStageBgm(StageDataHolder.Instance.selectedStage.stageNumber);
+            }
+            else
+            {
+                Debug.LogWarning("[GameManager] 선택된 스테이지가 없습니다.");
+            }
         }
+    
 
-
-        var stageData = StageManager.instance.currentStageData;
-        if (stageData != null)
-        {
-            BgmManager.instance.PlayStageBgm(stageData.stageNumber);
-        }
+            var stageData = StageManager.instance.currentStageData;
+            if (stageData != null)
+            {
+                BgmManager.instance.PlayStageBgm(stageData.stageNumber);
+            }
+       
     }
 
     private void Update()
@@ -188,6 +223,8 @@ public class GameManager : MonoBehaviour
 
 
             _currentStage += 1;             //스테이지 ++
+        PlayerPrefs.SetInt("LastStage", _currentStage);
+        PlayerPrefs.Save(); 
 
         //_player.PlayerSpeed += _increaseSpeed * _currentStage;              //플레이어 속도는 증가값 * 스테이지(추후에 변경해야 될 사항)
 

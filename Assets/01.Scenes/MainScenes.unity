@@ -12711,6 +12711,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a4ae9c3caaaa4d46915ab027e295483, type: 2}
   player: {fileID: 935364270}
   GameManager: {fileID: 852120248}
+  healthUI: {fileID: 1361682862}
 --- !u!82 &1944710116
 AudioSource:
   m_ObjectHideFlags: 0
