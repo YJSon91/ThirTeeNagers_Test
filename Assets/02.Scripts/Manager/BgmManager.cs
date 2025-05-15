@@ -60,16 +60,15 @@ public class BgmManager : MonoBehaviour
             return;
         }
         PlayBgm(data.bgm);
+        Debug.Log($"[BGMManager] 스테이지 번호: {stageNumber}");
     }
 
     private void PlayBgm(AudioClip clip)
     {
-        if (audioSource.clip == clip && !audioSource.isPlaying)
+        if(audioSource.clip != clip)
         {
-            audioSource.Play();
-            return;
+            audioSource.clip = clip;
         }
-        audioSource.clip = clip;
         audioSource.Play();
     }
 

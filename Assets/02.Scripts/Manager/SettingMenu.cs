@@ -38,6 +38,7 @@ public class SettingMenu : MonoBehaviour
         }
         settingPanel.SetActive(true);
         pausePanel.SetActive(false);
+        SFXManager.instance.PlayOnButtonClick();
     }
 
     //세팅메뉴 비활성화
@@ -45,6 +46,7 @@ public class SettingMenu : MonoBehaviour
     {
         settingPanel.SetActive(false);
         pausePanel.SetActive(true);
+        SFXManager.instance.PlayerOffButtonClick();
     }
 
     // Start is called before the first frame update
@@ -100,6 +102,7 @@ public class SettingMenu : MonoBehaviour
         sfxaudioSource.volume = value;
         PlayerPrefs.SetFloat("sfxVolume", value);
         PlayerPrefs.Save();
+        
     }
     public void SetBgmVolume(float value)
     {

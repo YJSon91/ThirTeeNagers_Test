@@ -39,6 +39,7 @@ public class ButtonManager : MonoBehaviour
     public void RestartGame()
     {
         StartCoroutine(RestartRoutine());
+        SFXManager.instance.PlayOnButtonClick();
     }
     //리스타트 메서드
     public IEnumerator RestartRoutine()
@@ -62,6 +63,7 @@ public class ButtonManager : MonoBehaviour
 #else
     Application.Quit();
 #endif
+        SFXManager.instance.PlayerOffButtonClick();
     }
 
     //일시정지 버튼
@@ -69,17 +71,20 @@ public class ButtonManager : MonoBehaviour
     {
         PausePanel.SetActive(true);
         GameManager.Instance.Pause();
+        SFXManager.instance.PlayOnButtonClick();
     }
     //재개버튼
     public void ResumeButton()
     {
         PausePanel.SetActive(false);
         GameManager.Instance.Resume();
+        SFXManager.instance.PlayerOffButtonClick();
     }
     //시작 화면으로 이동
     public void GoTitleScreen()
     {
         SceneManager.LoadScene("TitleScene");
+        SFXManager.instance.PlayerOffButtonClick();
     }
     public void TutorialBoardClick()
     {

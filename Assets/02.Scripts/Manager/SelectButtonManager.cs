@@ -12,5 +12,6 @@ public class SelectButtonManager : MonoBehaviour
     {
         StageDataHolder.Instance.selectedStage = stageData;
         SceneManager.LoadScene("MainScenes");
+        SFXManager.instance.PlayOnButtonClick();
     }
 }

@@ -36,6 +36,7 @@ public class StageUnlockManager : MonoBehaviour
         PlayerPrefs.DeleteKey("UnlockedStage");     //unlockedStage 값만 playerPrefs에서 삭제
         PlayerPrefs.Save();
         Debug.Log("스테이지 잠금 정보가 초기화 되었습니다.");
+        SFXManager.instance.PlayerOffButtonClick();
     }
 
     public void UnlockAllStages()
@@ -48,5 +49,6 @@ public class StageUnlockManager : MonoBehaviour
         {
             stageButtons[i].interactable = true;
         }
+        SFXManager.instance.PlayOnButtonClick();
     }
 }

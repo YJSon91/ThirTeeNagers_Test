@@ -9,6 +9,7 @@ public class TitleSceneBtns : MonoBehaviour
   public void SceneChange()
     {
         SceneManager.LoadScene("StageScene");// 스테이지로 이동
+        SFXManager.instance.PlayOnButtonClick();
     }
 
     public void GameExit()//종료 버튼
@@ -19,6 +20,8 @@ public class TitleSceneBtns : MonoBehaviour
         #else
         Application.Quit();
         #endif
+
+        SFXManager.instance.PlayerOffButtonClick();
     }
 
     private void Start()
