@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af92345a4c2f36346b420626beb180c7, type: 3}
+  m_Name: Stage_1
+  m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: -1.431, z: 0}
+  stageNumber: 1
+  survivalTime: 30
+  playerSpeed: 4
+  backgroundPrefab: {fileID: 1372115713226725831, guid: 048e80bd9dafb8442be6393ecc04db71, type: 3}
+  bgm: {fileID: 8300000, guid: cc7a8d5ae50260b46acd222923ab6271, type: 3}
+  backgroundColor: {r: 0.7058824, g: 0.87843144, b: 0.9960785, a: 0}
