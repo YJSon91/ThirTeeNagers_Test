@@ -199,7 +199,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
         SoundManager.instance.PlayDeath();
-        
+        PlayerPrefs.SetInt("LastStage", _currentStage);
+        PlayerPrefs.Save();
     }
 
 
